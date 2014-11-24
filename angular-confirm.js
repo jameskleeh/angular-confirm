@@ -24,7 +24,7 @@ angular.module('confirm', ['ui.bootstrap'])
     
     $confirmModalSettings.resolve.data = function() { return data; };
 
-    var modal = $modal.open($confirmSettings);
+    var modal = $modal.open($confirmModalSettings);
 
     modal.result.then(function () {			
     	func();
