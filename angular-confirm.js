@@ -10,21 +10,28 @@ angular.module('confirm', ['ui.bootstrap'])
     $modalInstance.dismiss('cancel');
   };
 })
-.factory('$confirm', function($modal) {
+.value('$confirmSettings', {
+  template: '<div class="modal-header"><h3 class="modal-title">Confirm</h3></div><div class="modal-body">{{data.text}}</div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">OK</button><button class="btn btn-warning" ng-click="cancel()">Cancel</button></div>',
+  controller: 'ConfirmModalController',
+  resolve: {
+    data: function() {
+      return data;
+    }
+  }
+})
+.factory('$confirm', function($modal, $confirmSettings) {
   return function(data, func) {
-    var modal = $modal.open({
-      template: '<div class="modal-header"><h3 class="modal-title">Confirm</h3></div><div class="modal-body">{{data.text}}</div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">OK</button><button class="btn btn-warning" ng-click="cancel()">Cancel</button></div>',
-      controller: 'ConfirmModalController',
-      resolve: {
-        data: function() {
-          return data;
-        }
-      }
-    });
+    
+    if ('templateUrl' in $confirmSettings) {
+      delete $confirmSettings.template;
+    }
+
+    var modal = $modal.open($confirmSettings);
 
     modal.result.then(function () {			
     	func();
     });
+    
   };
 })
 .directive('confirm', function($confirm) {
