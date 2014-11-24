@@ -3,7 +3,7 @@ angular.module('confirm', ['ui.bootstrap'])
   $scope.data = angular.copy(data);
 
   $scope.ok = function () {
-  	$modalInstance.close();
+    $modalInstance.close();
   };
 
   $scope.cancel = function () {
