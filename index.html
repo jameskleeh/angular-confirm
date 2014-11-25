@@ -39,12 +39,12 @@
 
         <p>The <code>confirm</code> directive can be placed on anything that also has <code>ngClick</code></p>
 
-<pre><code>&lt;button type=&quot;button&quot; ng-click=&quot;delete()&quot; confirm=&quot;Are you sure, {{name}}?&quot;&gt;Delete&lt;/button&gt;
+<pre><code ng-non-bindable>&lt;button type=&quot;button&quot; ng-click=&quot;delete()&quot; confirm=&quot;Are you sure, {{name}}?&quot;&gt;Delete&lt;/button&gt;
 </code></pre>
 
         <p>The <code>confirmIf</code> directive can also be used if you only want the confirmation dialog to show if the expression supplied is true</p>
 
-<pre><code>&lt;button type=&quot;button&quot; ng-click=&quot;delete()&quot; confirm-if=&quot;checked&quot; confirm=&quot;Are you sure, {{name}}?&quot;&gt;Delete&lt;/button&gt;
+<pre><code ng-non-bindable>&lt;button type=&quot;button&quot; ng-click=&quot;delete()&quot; confirm-if=&quot;checked&quot; confirm=&quot;Are you sure, {{name}}?&quot;&gt;Delete&lt;/button&gt;
 </code></pre>
 <br />
 <p>Enter your name here to observe it is shown in the modal confirmation text.</p>
