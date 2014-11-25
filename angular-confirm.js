@@ -32,9 +32,7 @@ angular.module('confirm', ['ui.bootstrap'])
 
     var modal = $modal.open($confirmModalSettings);
 
-    modal.result.then(function () {			
-    	func();
-    });
+    modal.result.then(func);
     
   };
 })
