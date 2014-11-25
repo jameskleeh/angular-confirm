@@ -34,7 +34,7 @@
         <h3><a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h3>
 
         <p>This module depends on Angular-UI bootstrap for its <code>$modal</code> service and can be used in two different ways</p>
-
+<br />
         <h3><a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>As a directive</h3>
 
         <p>The <code>confirm</code> directive can be placed on anything that also has <code>ngClick</code></p>
@@ -65,7 +65,7 @@ Name: <input type="text" ng-model="name" style="display: block; margin-bottom:10
 
 <button type="button" ng-click="deleted = ''">Reset</button>
 <br />
-
+<br />
 
 
 <h3>
@@ -119,19 +119,19 @@ Name: <input type="text" ng-model="name" style="display: block; margin-bottom:10
 </div>
 <button type="button" ng-click="deletedConfirm = ''">Reset</button>
 <br />
-
+<br />
 
 <h3>
 <a id="rather-drive-stick" class="anchor" href="#rather-drive-stick" aria-hidden="true"><span class="octicon octicon-link"></span></a>Settings</h3>
 
-<p>You can inject and modify <code>$confirmModalDefaults</code> to change the settings that get passed to the <code>$modal</code> service. The modifications made will apply any time the module is used from that point forward.</p>
+<p>You can inject and modify <code>$confirmModalDefaults</code> to change the default settings that get passed to the <code>$modal</code> service.</p>
 
 <pre><code ng-non-bindable>.run(function($confirmModalDefaults) {
   $confirmModalDefaults.templateUrl = 'path/to/your/template';
 })
 </code></pre>
 
-<p>You may also pass settings that will override the defaults when using <code>$confirm</code> directly.</p>
+<p>You may also pass settings that will override the default settings when using <code>$confirm</code> directly.</p>
 
 <pre><code ng-non-bindable>var settings = {
   templateUrl: 'path/to/your/template'
