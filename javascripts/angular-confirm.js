@@ -46,9 +46,24 @@ angular.module('angular-confirm', ['ui.bootstrap'])
         },
         link: function(scope, element, attrs) {
 
+          function reBind(func) {
+            var event = "click";
+            element.unbind(event).bind(event, function() {
+            	func();
+            });
+          }
+          
           function bindConfirm() {
-            element.unbind("click").bind("click", function() {
-            	$confirm({text: scope.confirm}, scope.ngClick);
+            reBind($confirm({text: scope.confirm}, scope.ngClick));
+          }
+          
+          function bindDefault() {
+            reBind(function() {
+              if (scope.$$phase || scope.$root.$$phase) {
+                scope.ngClick();
+              } else {
+                scope.$apply(scope.ngClick);
+              }
             });
           }
 
@@ -57,13 +72,7 @@ angular.module('angular-confirm', ['ui.bootstrap'])
               if (newVal) {
                 bindConfirm();
               } else {
-                element.unbind("click").bind("click", function() {
-                  if (scope.$$phase || scope.$root.$$phase) {
-                    scope.ngClick();
-                  } else {
-                    scope.$apply(scope.ngClick);
-                  }
-                });
+                bindDefault();
               }
             });
           } else {
