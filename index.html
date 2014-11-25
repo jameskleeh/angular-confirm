@@ -73,7 +73,7 @@ Name: <input type="text" ng-model="name" style="display: block; margin-bottom:10
     <span class="octicon octicon-link"></span></a>
     As a Service
 </h3>
-<h5><code>$confirm(params)</code></h5>
+<h5><code>$confirm([data], [settings])</code></h5>
 <p>The <code>$confirm</code> service is available for you to show confirmation dialogs. This allows you to show confirmations without having to have an HTML element tied to the action.</p>
 <table class="variables-matrix input-arguments">
   <thead>
@@ -87,12 +87,12 @@ Name: <input type="text" ng-model="name" style="display: block; margin-bottom:10
     <tr>
       <td>data</td>
       <td>Object</td>
-      <td>Data to be used by the modal template/templateUrl. Referenced with "data."</td>
+      <td>(Optional) Data to be used by the modal template/templateUrl. Referenced with "data."</td>
     </tr>
     <tr>
       <td>settings</td>
       <td>Object</td>
-      <td>Settings that will be passed to $modal</td>
+      <td>(Optional) Settings that will be passed to $modal</td>
     </tr>
   </tbody>
 </table>
