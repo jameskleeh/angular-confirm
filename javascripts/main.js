@@ -4,6 +4,7 @@ angular.module('myApp', ['angular-confirm'])
     $scope['delete'] = function() {
       console.log('inside scope delete');
       $scope.deleted = 'Deleted';
+      console.log($scope);
     };
     
   });
