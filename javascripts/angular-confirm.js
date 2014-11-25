@@ -45,26 +45,31 @@ angular.module('angular-confirm', ['ui.bootstrap'])
           confirm: '@'
         },
         link: function(scope, element, attrs) {
+          function unbind() {
+            element.unbind("click");
+            return element;
+          }
+          
+          function bind(func) {
+            element.bind("click", func);
+            return element;
+          }
+          
           function bindConfirm() {
-            element.unbind("click").bind("click", function() {
+            unbind().bind(function() {
             	$confirm({text: scope.confirm}, scope.ngClick);
             });
           }
 
           if ('confirmIf' in attrs) {
-            console.log('confirmIf is in attrs');
             scope.$watch('confirmIf', function(newVal) {
-              console.log('inside watch - unbound click');
-
-              element.unbind("click");
               if (newVal) {
-                console.log('inside watch - calling bindConfirm');
                 bindConfirm();
               } else {
-                console.log('inside watch - creating regular click handler');
-                console.log(scope.ngClick);
-                element.bind("click", function() {
-                  scope.ngClick();
+                unbind().bind(function() {
+                  scope.$apply(function() {
+                    scope.ngClick();
+                  });
                   console.log(scope);
                 });
               }
