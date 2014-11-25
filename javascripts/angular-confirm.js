@@ -54,7 +54,10 @@ angular.module('angular-confirm', ['ui.bootstrap'])
         }
         
         function bindConfirm() {
-          $confirm({text: scope.confirm}, scope.ngClick);
+          $confirm({
+            data: {text: scope.confirm},
+            confirmed: scope.ngClick
+          });
         }
         
         if ('confirmIf' in attrs) {
