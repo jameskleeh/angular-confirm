@@ -76,6 +76,51 @@ Name: <input type="text" ng-model="name" style="display: block; margin-bottom:10
 
 <p>The <code>$confirm</code> service is available for you to show confirmation dialogs. This allows you to show confirmations without having to have an HTML element tied to the action.</p>
 
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        data
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">object</a>
+      </td>
+      <td>
+        <p>Data to be used in the modal HTML</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        success
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-function">Function</a>
+      </td>
+      <td>
+        <p>The function that will be executed when the user confirms the action</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
 <pre><code ng-non-bindable>
 .controller("Controller", function($scope, $confirm) {
   $scope.delete = function() {
