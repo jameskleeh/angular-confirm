@@ -61,7 +61,7 @@
 <br />
 <p>This button will only show a dialog if the checkbox is checked and will execute the <code>ngClick</code> expression if "OK" is clicked in the modal.</p>
 
-<input type="checkbox" ng-model="checked" /><br />
+<label><input type="checkbox" ng-model="checked" />Check to enable the confirmation dialog</label><br />
 <button type="button" ng-click="deleteTwo()" confirm-if="checked" confirm="Are you sure, {{name}}?">Delete (will disappear in 3 seconds)</button>
 <br />
 <span style="font-weight: bold; font-size: 20px; color: rgb(184, 0, 0);">{{deleted_two}}</span>
