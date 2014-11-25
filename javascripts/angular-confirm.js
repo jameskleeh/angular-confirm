@@ -45,18 +45,9 @@ angular.module('angular-confirm', ['ui.bootstrap'])
           confirm: '@'
         },
         link: function(scope, element, attrs) {
-          function unbind() {
-            element.unbind("click");
-            return element;
-          }
-          
-          function bind(func) {
-            element.bind("click", func);
-            return element;
-          }
-          
+
           function bindConfirm() {
-            unbind().bind(function() {
+            element.unbind("click").bind("click", function() {
             	$confirm({text: scope.confirm}, scope.ngClick);
             });
           }
@@ -66,7 +57,7 @@ angular.module('angular-confirm', ['ui.bootstrap'])
               if (newVal) {
                 bindConfirm();
               } else {
-                unbind().bind(function() {
+                element.unbind("click").bind("click", function() {
                   scope.$apply(function() {
                     scope.ngClick();
                   });
