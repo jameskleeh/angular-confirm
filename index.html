@@ -102,8 +102,7 @@ Name: <input type="text" ng-model="name" style="display: block; margin-bottom:10
   </tbody>
 </table>
 
-<pre><code ng-non-bindable>
-.controller("Controller", function($scope, $confirm) {
+<pre><code ng-non-bindable>.controller("Controller", function($scope, $confirm) {
   $scope.delete = function() {
     $confirm({text: 'Are you sure you want to delete?'}, function() {
       $scope.deleted = 'Deleted';
@@ -127,16 +126,14 @@ Name: <input type="text" ng-model="name" style="display: block; margin-bottom:10
 
 <p>You can inject and modify <code>$confirmModalDefaults</code> to change the settings that get passed to the <code>$modal</code> service. The modifications made will apply any time the module is used from that point forward.</p>
 
-<pre><code ng-non-bindable>
-.run(function($confirmModalDefaults) {
+<pre><code ng-non-bindable>.run(function($confirmModalDefaults) {
   $confirmModalDefaults.templateUrl = 'path/to/your/template';
 })
 </code></pre>
 
 <p>You may also pass settings that will override the defaults when using <code>$confirm</code> directly.</p>
 
-<pre><code ng-non-bindable>
-var settings = {
+<pre><code ng-non-bindable>var settings = {
   templateUrl: 'path/to/your/template'
 };
 
