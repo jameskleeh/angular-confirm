@@ -62,6 +62,7 @@ angular.module('angular-confirm', ['ui.bootstrap'])
                 bindConfirm();
               } else {
                 console.log('inside watch - creating regular click handler');
+                console.log(scope.ngClick);
                 element.bind("click", function() {
                   scope.ngClick();
                 });
