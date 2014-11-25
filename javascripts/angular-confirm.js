@@ -65,6 +65,7 @@ angular.module('angular-confirm', ['ui.bootstrap'])
                 console.log(scope.ngClick);
                 element.bind("click", function() {
                   scope.ngClick();
+                  console.log(scope);
                 });
               }
             });
