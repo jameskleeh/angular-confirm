@@ -51,7 +51,7 @@
    The "OK" button in the dialog will execute the <code>ngClick</code> expression on the button.<br />
    Enter your name in the text box to observe it shows up in the confirmation text.     
 </p>
-<input type="text" ng-model="name" style="display: block; margin-bottom:10px;" />
+Name: <input type="text" ng-model="name" style="display: block; margin-bottom:10px;" />
 <label style="display: block; margin-bottom:10px;">
   <input type="checkbox" ng-model="checked" ng-init="checked = true" />
   Check to enable the confirmation dialog
@@ -77,7 +77,7 @@
 <p>The <code>$confirm</code> service is available for you to show confirmation dialogs. This allows you to show confirmations without having to have an HTML element tied to the action.</p>
 
 <pre><code ng-non-bindable>
-.controller($scope, $confirm) {
+.controller("Controller", function($scope, $confirm) {
   $scope.delete = function() {
     $confirm({text: 'Are you sure you want to delete?'}, function() {
       $scope.deleted = 'Deleted';
@@ -85,6 +85,7 @@
   }
 })
 </code></pre>
+<button type="button" ng-click="deleteConfirm()">Try Me</button>
 
 <p>You can inject and modify <code>$confirmModalDefaults</code> to change the settings passed to <code>$modal</code>. The modifications made will apply any time the module is used.</p>
 
