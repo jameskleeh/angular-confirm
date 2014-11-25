@@ -46,7 +46,7 @@ angular.module('angular-confirm', ['ui.bootstrap'])
         },
         link: function(scope, element, attrs) {
           
-          scope.$watch('confirmIf', function(newVal) {
+            scope.$watch('confirmIf', function(newVal) {
               if (newVal) {
                 element.unbind("click").bind("click", function() {
                 	$confirm({text: scope.confirm}, scope.ngClick);
@@ -61,5 +61,6 @@ angular.module('angular-confirm', ['ui.bootstrap'])
                 }); 
               }
             });
+        }
     }
 });
