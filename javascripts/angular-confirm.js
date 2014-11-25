@@ -46,36 +46,20 @@ angular.module('angular-confirm', ['ui.bootstrap'])
         },
         link: function(scope, element, attrs) {
           
-          function bindClick(func) {
-            var event = "click";
-            element.unbind(event).bind(event, func);
-          }
-          
-          function bindConfirm() {
-            bindClick($confirm({text: scope.confirm}, scope.ngClick));
-          }
-          
-          function bindDefault() {
-            bindClick(function() {
-              if (scope.$$phase || scope.$root.$$phase) {
-                scope.ngClick();
-              } else {
-                scope.$apply(scope.ngClick);
-              }
-            });
-          }
-
-          if ('confirmIf' in attrs) {
-            scope.$watch('confirmIf', function(newVal) {
+          scope.$watch('confirmIf', function(newVal) {
               if (newVal) {
-                bindConfirm();
+                element.unbind("click").bind("click", function() {
+                	$confirm({text: scope.confirm}, scope.ngClick);
+                });
               } else {
-                bindDefault();
+                element.unbind("click").bind("click",function() {
+                	if (scope.$$phase || scope.$root.$$phase) {
+                    scope.ngClick();
+                  } else {
+                    scope.$apply(scope.ngClick);
+                  }
+                }); 
               }
             });
-          } else {
-            bindConfirm();
-          }
-        }
     }
 });
