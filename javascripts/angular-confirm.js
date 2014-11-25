@@ -58,10 +58,11 @@ angular.module('angular-confirm', ['ui.bootstrap'])
                 bindConfirm();
               } else {
                 element.unbind("click").bind("click", function() {
-                  scope.$apply(function() {
+                  if (scope.$$phase || scope.$root.$$phase) {
                     scope.ngClick();
-                  });
-                  console.log(scope);
+                  } else {
+                    scope.$apply(scope.ngClick);
+                  }
                 });
               }
             });
