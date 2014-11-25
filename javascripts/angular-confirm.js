@@ -21,10 +21,9 @@ angular.module('angular-confirm', ['ui.bootstrap'])
   controller: 'ConfirmModalController'
 })
 .factory('$confirm', function($modal, $confirmModalDefaults) {
-  return function(obj) {
-    var settings = angular.extend($confirmModalDefaults, (obj.settings || {})),
-        func = obj.confirmed || function() {},
-        data = obj.data || {text: ''};
+  return function(data, settings) {
+    settings = angular.extend($confirmModalDefaults, (settings || {}));
+    data = data || {};
         
     if ('templateUrl' in settings && 'template' in settings) {
       delete settings.template;
