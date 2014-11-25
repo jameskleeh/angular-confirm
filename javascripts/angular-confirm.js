@@ -32,9 +32,7 @@ angular.module('angular-confirm', ['ui.bootstrap'])
     
     settings.resolve = {data: function() { return data; }};
 
-    var modal = $modal.open(settings);
-
-    modal.result.then(func);
+    return $modal.open(settings).result;
   };
 })
 .directive('confirm', function($confirm) {
@@ -54,10 +52,8 @@ angular.module('angular-confirm', ['ui.bootstrap'])
         }
         
         function bindConfirm() {
-          $confirm({
-            data: {text: scope.confirm},
-            confirmed: scope.ngClick
-          });
+          $confirm({text: scope.confirm})
+            .then(scope.ngClick);
         }
         
         if ('confirmIf' in attrs) {
