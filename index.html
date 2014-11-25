@@ -85,9 +85,14 @@ Name: <input type="text" ng-model="name" style="display: block; margin-bottom:10
   </thead>
   <tbody>
     <tr>
-      <td>params</td>
+      <td>data</td>
       <td>Object</td>
-      <td>Parameters to be used by $confirm (data, confirmed, settings)</td>
+      <td>Data to be used by the modal template/templateUrl. Referenced with "data."</td>
+    </tr>
+    <tr>
+      <td>settings</td>
+      <td>Object</td>
+      <td>Settings that will be passed to $modal</td>
     </tr>
   </tbody>
 </table>
@@ -125,20 +130,21 @@ Name: <input type="text" ng-model="name" style="display: block; margin-bottom:10
 <p>You may also pass settings that will override the default settings when using <code>$confirm</code> directly.</p>
 
 <pre><code ng-non-bindable>$confirm({}, {
-    templateUrl: 'path/to/your/template'
-  })
-    .then(function() {
-    });
+  templateUrl: 'path/to/your/template'
+})
+  .then(function() {
+    ...
+  });
 </code></pre>
 
 <p>If you provide your own <code>template</code> or <code>templateUrl</code> you may use any data passed to <code>$confirm</code> by referencing it with <code>data.</code>. The default template expects a "text" key to show the confirmation text.</p>
 
 <pre><code ng-non-bindable>$confirm({name: "Sally"}, {
-    template: 'Hello {{data.name}}!'
-  })
-    .then(function() {
-      ...
-    });
+  template: 'Hello {{data.name}}!'
+})
+  .then(function() {
+    ...
+  });
 </code></pre>
 
       </section>
