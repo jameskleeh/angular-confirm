@@ -48,7 +48,7 @@
 </code></pre>
 <br />
 <br />
-<p>This button will always show a dialog and will execute the <code>delete</code> function if OK is clicked on the modal.</p>
+<p>This button will always show a dialog and will execute the <code>ngClick</code> expression if "OK" is clicked in the modal.</p>
 
 <button type="button" ng-click="delete()" confirm="Are you sure, {{name}}?">Delete (will disappear in 3 seconds)</button>
 
@@ -56,7 +56,7 @@
 
 <br />
 <br />
-<p>This button will only show a dialog if the checkbox is checked and will execute the <code>delete</code> function if OK is clicked on the modal.</p>
+<p>This button will only show a dialog if the checkbox is checked and will execute the <code>ngClick</code> expression if "OK" is clicked in the modal.</p>
 
 <input type="checkbox" ng-model="checked" /><br />
 <button type="button" ng-click="deleteTwo()" confirm-if="checked" confirm="Are you sure, {{name}}?">Delete (will disappear in 3 seconds)</button>
