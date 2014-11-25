@@ -129,9 +129,7 @@ Name: <input type="text" ng-model="name" style="display: block; margin-bottom:10
 
 <p>You may also pass settings that will override the default settings when using <code>$confirm</code> directly.</p>
 
-<pre><code ng-non-bindable>$confirm({}, {
-  templateUrl: 'path/to/your/template'
-})
+<pre><code ng-non-bindable>$confirm({}, { templateUrl: 'path/to/your/template' })
   .then(function() {
     ...
   });
@@ -139,9 +137,7 @@ Name: <input type="text" ng-model="name" style="display: block; margin-bottom:10
 
 <p>If you provide your own <code>template</code> or <code>templateUrl</code> you may use any data passed to <code>$confirm</code> by referencing it with <code>data.</code>. The default template expects a "text" key to show the confirmation text.</p>
 
-<pre><code ng-non-bindable>$confirm({name: "Sally"}, {
-  template: 'Hello {{data.name}}!'
-})
+<pre><code ng-non-bindable>$confirm({name: "Sally"}, { template: 'Hello {{data.name}}!' })
   .then(function() {
     ...
   });
