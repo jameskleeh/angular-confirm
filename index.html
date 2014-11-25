@@ -46,19 +46,22 @@
 
 <pre><code>&lt;button type=&quot;button&quot; ng-click=&quot;delete()&quot; confirm-if=&quot;checked&quot; confirm=&quot;Are you sure, {{name}}?&quot;&gt;Delete&lt;/button&gt;
 </code></pre>
-
+<br />
+<br />
 <p>This button will always show a dialog and will execute the <code>delete</code> function if OK is clicked on the modal.</p>
 
 <button type="button" ng-click="delete()" confirm="Are you sure, {{name}}?">Delete (will disappear in 3 seconds)</button>
 
-<span style="font-weight: bold; font-size: 16px;">{{deleted}}</span>
+<span style="font-weight: bold; font-size: 20px; color: rgb(184, 0, 0);">{{deleted}}</span>
 
+<br />
+<br />
 <p>This button will only show a dialog if the checkbox is checked and will execute the <code>delete</code> function if OK is clicked on the modal.</p>
 
 <input type="checkbox" ng-model="checked" /><br />
 <button type="button" ng-click="deleteTwo()" confirm-if="checked" confirm="Are you sure, {{name}}?">Delete (will disappear in 3 seconds)</button>
 <br />
-{{deleted_two}}
+<span style="font-weight: bold; font-size: 20px; color: rgb(184, 0, 0);">{{deleted_two}}</span>
 
 <h3>
 <a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
