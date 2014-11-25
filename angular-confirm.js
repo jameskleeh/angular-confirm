@@ -20,7 +20,7 @@ angular.module('confirm', ['ui.bootstrap'])
   template: '<div class="modal-header"><h3 class="modal-title">Confirm</h3></div><div class="modal-body">{{data.text}}</div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">OK</button><button class="btn btn-warning" ng-click="cancel()">Cancel</button></div>',
   controller: 'ConfirmModalController'
 })
-.factory('$confirm', function($modal, $confirmModalSettings) {
+.factory('$confirm', function($modal, $confirmModalDefaults) {
   return function(data, func, settings) {
     settings = angular.extend($confirmModalDefaults, settings);
     
