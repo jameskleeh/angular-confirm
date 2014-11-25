@@ -61,7 +61,7 @@ angular.module('angular-confirm', ['ui.bootstrap'])
               reBind(bindConfirm);
            } else {
               reBind(function() {
-             	  if (scope.$$phase || scope.$root.$$phase) {
+             	if (scope.$$phase || scope.$root.$$phase) {
                   scope.ngClick();
                 } else {
                   scope.$apply(scope.ngClick);
