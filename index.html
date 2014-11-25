@@ -65,13 +65,33 @@
 
 <button type="button" ng-click="deleted = ''">Reset</button>
 <br />
+
+
+
 <h3>
   <a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true">
     <span class="octicon octicon-link"></span></a>
-    Settings
+    As a Service
 </h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>The <code>$confirm</code> service is available for you to show confirmation dialogs. This allows you to show confirmations without having to have an HTML element tied to the action.</p>
+
+<pre><code ng-non-bindable>
+.controller($scope, $confirm) {
+  $scope.delete = function() {
+    $confirm({text: 'Are you sure you want to delete?'}, function() {
+      $scope.deleted = 'Deleted';
+    });
+  }
+})
+</code></pre>
+
+<p>You can inject and modify <code>$confirmModalDefaults</code> to change the settings passed to <code>$modal</code>. The modifications made will apply any time the module is used.</p>
+
+
+
+
+<p>You can inject and modify <code>$confirmModalDefaults</code> to change the settings passed to <code>$modal</code>. The modifications made will apply any time the module is used.</p>
 
 <h3>
 <a id="rather-drive-stick" class="anchor" href="#rather-drive-stick" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
