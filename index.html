@@ -85,7 +85,11 @@ Name: <input type="text" ng-model="name" style="display: block; margin-bottom:10
   }
 })
 </code></pre>
-<button type="button" ng-click="deleteConfirm()">Try Me</button>
+<button type="button" ng-click="deleteConfirm()">Try Me  (Click "Reset" to clear)</button>
+<span style="font-weight: bold; font-size: 20px; color: rgb(184, 0, 0); margin-left: 30px">{{deletedConfirm}}</span>
+<br />
+<button type="button" ng-click="deletedConfirm = ''">Reset</button>
+
 
 <p>You can inject and modify <code>$confirmModalDefaults</code> to change the settings passed to <code>$modal</code>. The modifications made will apply any time the module is used.</p>
 
