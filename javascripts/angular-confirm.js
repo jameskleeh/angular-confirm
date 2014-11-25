@@ -37,30 +37,29 @@ angular.module('angular-confirm', ['ui.bootstrap'])
 })
 .directive('confirm', function($confirm) {
     return {
-        priority: 1,
-        restrict: 'A',
-        scope: {
-          confirmIf: "=",
-          ngClick: '&',
-          confirm: '@'
-        },
-        link: function(scope, element, attrs) {
-          
-            scope.$watch('confirmIf', function(newVal) {
-              if (newVal) {
-                element.unbind("click").bind("click", function() {
-                	$confirm({text: scope.confirm}, scope.ngClick);
-                });
-              } else {
-                element.unbind("click").bind("click",function() {
-                	if (scope.$$phase || scope.$root.$$phase) {
-                    scope.ngClick();
-                  } else {
-                    scope.$apply(scope.ngClick);
-                  }
-                }); 
-              }
+      priority: 1,
+      restrict: 'A',
+      scope: {
+        confirmIf: "=",
+        ngClick: '&',
+        confirm: '@'
+      },
+      link: function(scope, element, attrs) {
+        scope.$watch('confirmIf', function(newVal) {
+          if (newVal) {
+            element.unbind("click").bind("click", function() {
+              $confirm({text: scope.confirm}, scope.ngClick);
             });
-        }
+          } else {
+            element.unbind("click").bind("click",function() {
+            	if (scope.$$phase || scope.$root.$$phase) {
+                scope.ngClick();
+              } else {
+                scope.$apply(scope.ngClick);
+              }
+            }); 
+          }
+        });
+      }
     }
 });
