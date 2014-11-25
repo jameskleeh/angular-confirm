@@ -46,18 +46,17 @@ angular.module('angular-confirm', ['ui.bootstrap'])
         },
         link: function(scope, element, attrs) {
           
-          function bind(func) {
-            element.unbind("click").bind("click", function() {
-            	func();
-            });
+          function bindClick(func) {
+            var event = "click";
+            element.unbind(event).bind(event, func);
           }
           
           function bindConfirm() {
-            bind($confirm({text: scope.confirm}, scope.ngClick));
+            bindClick($confirm({text: scope.confirm}, scope.ngClick));
           }
           
           function bindDefault() {
-            bind(function() {
+            bindClick(function() {
               if (scope.$$phase || scope.$root.$$phase) {
                 scope.ngClick();
               } else {
