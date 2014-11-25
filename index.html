@@ -47,6 +47,8 @@
 <pre><code>&lt;button type=&quot;button&quot; ng-click=&quot;delete()&quot; confirm-if=&quot;checked&quot; confirm=&quot;Are you sure, {{name}}?&quot;&gt;Delete&lt;/button&gt;
 </code></pre>
 <br />
+<p>Enter your name here to observer it is shown in the modal confirmation text.</p>
+<input type="text" ng-model="name" />
 <br />
 <p>This button will always show a dialog and will execute the <code>ngClick</code> expression if "OK" is clicked in the modal.</p>
 
