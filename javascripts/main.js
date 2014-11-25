@@ -1,8 +1,14 @@
 angular.module('myApp', ['angular-confirm'])
-  .controller('MyController', function($scope) {
+  .controller('MyController', function($scope, $confirm) {
 
     $scope['delete'] = function() {
       $scope.deleted = 'Deleted';
+    };
+    
+    $scope['deleteConfirm'] = function() {
+      $confirm({text: 'Are you sure you want to delete?'}, function() {
+        $scope.deleted = 'Deleted';
+      });
     };
     
   });
