@@ -18,8 +18,7 @@ angular.module('confirm', ['ui.bootstrap'])
 })
 .value('$confirmModalSettings', {
   template: '<div class="modal-header"><h3 class="modal-title">Confirm</h3></div><div class="modal-body">{{data.text}}</div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">OK</button><button class="btn btn-warning" ng-click="cancel()">Cancel</button></div>',
-  controller: 'ConfirmModalController',
-  resolve: {}
+  controller: 'ConfirmModalController'
 })
 .factory('$confirm', function($modal, $confirmModalSettings) {
   return function(data, func) {
@@ -28,7 +27,7 @@ angular.module('confirm', ['ui.bootstrap'])
       delete $confirmModalSettings.template;
     }
     
-    $confirmModalSettings.resolve.data = function() { return data; };
+    $confirmModalSettings.resolve = {data: function() { return data; }};
 
     var modal = $modal.open($confirmModalSettings);
 
