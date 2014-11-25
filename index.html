@@ -51,11 +51,15 @@
    The "OK" button in the dialog will execute the <code>ngClick</code> expression on the button.<br />
    Enter your name in the text box to observe it shows up in the confirmation text.     
 </p>
-<input type="text" ng-model="name" />
-<label><input type="checkbox" ng-model="checked" ng-init="checked = true" />Check to enable the confirmation dialog</label><br />
-<button type="button" ng-click="delete()" confirm-if="checked" confirm="Are you sure, {{name}}?">Delete (will disappear in 3 seconds)</button>
+<input type="text" ng-model="name" style="display: block; margin-bottom:10px;" />
+<label style="display: block; margin-bottom:10px;">
+  <input type="checkbox" ng-model="checked" ng-init="checked = true" />
+  Check to enable the confirmation dialog
+</label>
+<button type="button" style="display: block; margin-bottom:10px;" ng-click="delete()" confirm-if="checked" confirm="Are you sure, {{name}}?">
+  Delete (will disappear in 3 seconds)
+</button>
 <span style="font-weight: bold; font-size: 20px; color: rgb(184, 0, 0);">{{deleted}}</span>
-<br />
 <button type="button" ng-click="deleted = ''">Reset</button>
 <h3>
 <a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
