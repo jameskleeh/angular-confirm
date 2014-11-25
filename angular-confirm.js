@@ -21,10 +21,9 @@ angular.module('angular-confirm', ['ui.bootstrap'])
   controller: 'ConfirmModalController'
 })
 .factory('$confirm', function($modal, $confirmModalDefaults) {
-  return function(obj) {
-    var settings = angular.extend($confirmModalDefaults, (obj.settings || {})),
-        func = obj.confirmed || function() {},
-        data = obj.data || {text: ''};
+  return function(data, settings) {
+    settings = angular.extend($confirmModalDefaults, (settings || {}));
+    data = data || {};
     
     if ('templateUrl' in settings && 'template' in settings) {
       delete settings.template;
@@ -32,9 +31,7 @@ angular.module('angular-confirm', ['ui.bootstrap'])
     
     settings.resolve = {data: function() { return data; }};
 
-    var modal = $modal.open(settings);
-
-    modal.result.then(func);
+    return $modal.open(settings).result;
   };
 })
 .directive('confirm', function($confirm) {
@@ -54,10 +51,7 @@ angular.module('angular-confirm', ['ui.bootstrap'])
         }
         
         function bindConfirm() {
-          $confirm({
-            data: {text: scope.confirm},
-            confirmed: scope.ngClick
-          });
+          $confirm({text: scope.confirm}).then(scope.ngClick);
         }
         
         if ('confirmIf' in attrs) {
