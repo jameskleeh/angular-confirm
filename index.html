@@ -73,7 +73,7 @@ Name: <input type="text" ng-model="name" style="display: block; margin-bottom:10
     <span class="octicon octicon-link"></span></a>
     As a Service
 </h3>
-<h5><code>$confirm(data, success, [settings])</code></h5>
+<h5><code>$confirm(params)</code></h5>
 <p>The <code>$confirm</code> service is available for you to show confirmation dialogs. This allows you to show confirmations without having to have an HTML element tied to the action.</p>
 <table class="variables-matrix input-arguments">
   <thead>
@@ -85,28 +85,21 @@ Name: <input type="text" ng-model="name" style="display: block; margin-bottom:10
   </thead>
   <tbody>
     <tr>
-      <td>data</td>
+      <td>params</td>
       <td>Object</td>
-      <td>Data to be used in the modal HTML</td>
-    </tr>
-    <tr>
-      <td>success</td>
-      <td>Function</td>
-      <td>The function that will be executed when the user confirms the action</td>
-    </tr>
-    <tr>
-      <td>settings</td>
-      <td>Object</td>
-      <td>Optional. Additional settings to be passed to <code>$modal</code></td>
+      <td>Parameters to be used by $confirm (data, confirmed, settings)</td>
     </tr>
   </tbody>
 </table>
 
 <pre><code ng-non-bindable>.controller("Controller", function($scope, $confirm) {
   $scope.delete = function() {
-    $confirm({text: 'Are you sure you want to delete?'}, function() {
-      $scope.deleted = 'Deleted';
-    });
+      $confirm({
+        data: {text: 'Are you sure you want to delete?'},
+        confirmed: function() {
+          $scope.deletedConfirm = 'Deleted';
+        }
+      });
   }
 })
 </code></pre>
@@ -133,24 +126,27 @@ Name: <input type="text" ng-model="name" style="display: block; margin-bottom:10
 
 <p>You may also pass settings that will override the default settings when using <code>$confirm</code> directly.</p>
 
-<pre><code ng-non-bindable>var settings = {
-  templateUrl: 'path/to/your/template'
-};
-
-$confirm({}, function() {
-...
-}, settings);
+<pre><code ng-non-bindable>$confirm({
+  confirmed: function() {
+    ...
+  },
+  settings: {
+    templateUrl: 'path/to/your/template'
+  }
+});
 </code></pre>
 
 <p>If you provide your own <code>template</code> or <code>templateUrl</code> you may use any data passed to <code>$confirm</code> by referencing it with <code>data.</code>. The default template expects a "text" key to show the confirmation text.</p>
 
-<pre><code ng-non-bindable>var settings = {
-  template: 'Hello {{data.name}}!'
-};
-
-$confirm({name: "Sally"}, function() {
-...
-}, settings);
+<pre><code ng-non-bindable>$confirm({
+  data: {name: "Sally"},
+  confirmed: function() {
+    ...
+  },
+  settings: {
+    template: 'Hello {{data.name}}!'
+  }
+});
 </code></pre>
 
       </section>
