@@ -142,7 +142,7 @@ $confirm({}, function() {
 }, settings);
 </code></pre>
 
-<p>If you provide your own <code>template</code> or <code>templateUrl</code> you may use any data passed to <code>$confirm</code> by referencing it with <code>data.</code></p>
+<p>If you provide your own <code>template</code> or <code>templateUrl</code> you may use any data passed to <code>$confirm</code> by referencing it with <code>data.</code>. The default template expects a "text" key to show the confirmation text.</p>
 
 <pre><code ng-non-bindable>var settings = {
   template: 'Hello {{data.name}}!'
