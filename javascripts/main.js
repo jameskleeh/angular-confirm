@@ -6,8 +6,7 @@ angular.module('myApp', ['angular-confirm'])
     }
     
     var hideTimeout;
-    var hideTimeout_two;
-    
+
     $scope.delete = function() {
       $scope.deleted = 'Deleted';
       $timeout.cancel(hideTimeout);
@@ -16,12 +15,6 @@ angular.module('myApp', ['angular-confirm'])
       })
     };
     
-    $scope.deleteTwo = function() {
-      $scope.deleted_two = 'Deleted';
-      $timeout.cancel(hideTimeout_two);
-      hideTimeout_two = hide(function() {
-        $scope.deleted_two = '';
-      })
-    }; 
+
     
   });
