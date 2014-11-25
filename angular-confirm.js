@@ -16,13 +16,13 @@ angular.module('confirm', ['ui.bootstrap'])
     $modalInstance.dismiss('cancel');
   };
 })
-.service('$confirmModalSettings', function() {
-  this.template = '<div class="modal-header"><h3 class="modal-title">Confirm</h3></div><div class="modal-body">{{data.text}}</div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">OK</button><button class="btn btn-warning" ng-click="cancel()">Cancel</button></div>';
-  this.controller = 'ConfirmModalController';
+.value('$confirmModalDefaults', {
+  template: '<div class="modal-header"><h3 class="modal-title">Confirm</h3></div><div class="modal-body">{{data.text}}</div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">OK</button><button class="btn btn-warning" ng-click="cancel()">Cancel</button></div>',
+  controller: 'ConfirmModalController'
 })
 .factory('$confirm', function($modal, $confirmModalSettings) {
   return function(data, func, settings) {
-    settings = settings || $confirmModalSettings;
+    settings = angular.extend($confirmModalDefaults, settings);
     
     if ('templateUrl' in settings && 'template' in settings) {
       delete settings.template;
@@ -45,21 +45,33 @@ angular.module('confirm', ['ui.bootstrap'])
           confirm: '@'
         },
         link: function(scope, element, attrs) {
-          function bindConfirm() {
+          
+          function bind(func) {
             element.unbind("click").bind("click", function() {
-            	$confirm({text: scope.confirm}, scope.ngClick);
+            	func();
+            });
+          }
+          
+          function bindConfirm() {
+            bind($confirm({text: scope.confirm}, scope.ngClick));
+          }
+          
+          function bindDefault() {
+            bind(function() {
+              if (scope.$$phase || scope.$root.$$phase) {
+                scope.ngClick();
+              } else {
+                scope.$apply(scope.ngClick);
+              }
             });
           }
 
           if ('confirmIf' in attrs) {
             scope.$watch('confirmIf', function(newVal) {
-              element.unbind("click");
               if (newVal) {
                 bindConfirm();
               } else {
-                element.bind("click", function() {
-                  scope.ngClick();
-                });
+                bindDefault();
               }
             });
           } else {
