@@ -52,11 +52,16 @@ angular.module('angular-confirm', ['ui.bootstrap'])
           }
 
           if ('confirmIf' in attrs) {
+            console.log('confirmIf is in attrs');
             scope.$watch('confirmIf', function(newVal) {
+              console.log('inside watch - unbound click');
+
               element.unbind("click");
               if (newVal) {
+                console.log('inside watch - calling bindConfirm');
                 bindConfirm();
               } else {
+                console.log('inside watch - creating regular click handler');
                 element.bind("click", function() {
                   scope.ngClick();
                 });
