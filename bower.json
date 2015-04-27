@@ -1,0 +1,11 @@
+{
+  "name": "angular-confirm",
+  "main": "angular-confirm.js",
+  "version": "1.0.0",
+  "homepage": "https://github.com/Schlogen/angular-confirm",
+  "authors": [
+    "James Kleeh"
+  ],
+  "description": "Confirmation modal dialog for AngularJS",
+  "license": "Apache"
+}
