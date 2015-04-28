@@ -1,11 +1,11 @@
 /*
  * angular-confirm
  * http://schlogen.github.io/angular-confirm/
- * Version: 1.0 - 2014-24-11
+ * Version: 1.0.2 - 2015-28-04
  * License: Apache
  */
 angular.module('angular-confirm', ['ui.bootstrap'])
-.controller('ConfirmModalController', function($scope, $modalInstance, data) {
+.controller('ConfirmModalController', ['$scope', '$modalInstance', 'data', function ($scope, $modalInstance, data) {
   $scope.data = angular.copy(data);
 
   $scope.ok = function () {
@@ -15,16 +15,16 @@ angular.module('angular-confirm', ['ui.bootstrap'])
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
   };
-})
+}])
 .value('$confirmModalDefaults', {
   template: '<div class="modal-header"><h3 class="modal-title">Confirm</h3></div><div class="modal-body">{{data.text}}</div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">OK</button><button class="btn btn-warning" ng-click="cancel()">Cancel</button></div>',
   controller: 'ConfirmModalController'
 })
-.factory('$confirm', function($modal, $confirmModalDefaults) {
+.factory('$confirm', ['$modal', '$confirmModalDefaults', function($modal, $confirmModalDefaults) {
   return function(data, settings) {
     settings = angular.extend($confirmModalDefaults, (settings || {}));
     data = data || {};
-        
+    
     if ('templateUrl' in settings && 'template' in settings) {
       delete settings.template;
     }
@@ -33,8 +33,8 @@ angular.module('angular-confirm', ['ui.bootstrap'])
 
     return $modal.open(settings).result;
   };
-})
-.directive('confirm', function($confirm) {
+}])
+.directive('confirm', ['$confirm', function($confirm) {
     return {
       priority: 1,
       restrict: 'A',
@@ -51,8 +51,7 @@ angular.module('angular-confirm', ['ui.bootstrap'])
         }
         
         function bindConfirm() {
-          $confirm({text: scope.confirm})
-            .then(scope.ngClick);
+          $confirm({text: scope.confirm}).then(scope.ngClick);
         }
         
         if ('confirmIf' in attrs) {
@@ -70,4 +69,4 @@ angular.module('angular-confirm', ['ui.bootstrap'])
         }
       }
     }
-});
+}]);
