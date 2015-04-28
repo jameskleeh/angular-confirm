@@ -1,7 +1,7 @@
 /*
  * angular-confirm
  * http://schlogen.github.io/angular-confirm/
- * Version: 1.0 - 2014-24-11
+ * Version: 1.0.2 - 2014-24-11
  * License: Apache
  */
 angular.module('angular-confirm', ['ui.bootstrap'])
