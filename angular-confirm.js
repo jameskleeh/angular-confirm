@@ -5,7 +5,7 @@
  * License: Apache
  */
 angular.module('angular-confirm', ['ui.bootstrap'])
-.controller('ConfirmModalController', function($scope, $modalInstance, data) {
+.controller('ConfirmModalController', ['$scope', '$modalInstance', 'data', function ($scope, $modalInstance, data) {
   $scope.data = angular.copy(data);
 
   $scope.ok = function () {
@@ -15,7 +15,7 @@ angular.module('angular-confirm', ['ui.bootstrap'])
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
   };
-})
+}])
 .value('$confirmModalDefaults', {
   template: '<div class="modal-header"><h3 class="modal-title">Confirm</h3></div><div class="modal-body">{{data.text}}</div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">OK</button><button class="btn btn-warning" ng-click="cancel()">Cancel</button></div>',
   controller: 'ConfirmModalController'
