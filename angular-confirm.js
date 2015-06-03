@@ -17,13 +17,17 @@ angular.module('angular-confirm', ['ui.bootstrap'])
   };
 }])
 .value('$confirmModalDefaults', {
-  template: '<div class="modal-header"><h3 class="modal-title">Confirm</h3></div><div class="modal-body">{{data.text}}</div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">OK</button><button class="btn btn-warning" ng-click="cancel()">Cancel</button></div>',
-  controller: 'ConfirmModalController'
+  template: '<div class="modal-header"><h3 class="modal-title">{{data.title}}</h3></div><div class="modal-body">{{data.text}}</div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">OK</button><button class="btn btn-warning" ng-click="cancel()">Cancel</button></div>',
+  controller: 'ConfirmModalController',
+  defaultTitle: 'Confirm'
 })
 .factory('$confirm', ['$modal', '$confirmModalDefaults', function($modal, $confirmModalDefaults) {
   return function(data, settings) {
     settings = angular.extend($confirmModalDefaults, (settings || {}));
     data = data || {};
+    
+    data.title = data.title || settings.defaultTitle;
+    delete settings.defaultTitle;
     
     if ('templateUrl' in settings && 'template' in settings) {
       delete settings.template;
