@@ -148,6 +148,9 @@ Name: <input type="text" ng-model="name" style="display: block; margin-bottom:10
 
 <pre><code ng-non-bindable>.run(function($confirmModalDefaults) {
   $confirmModalDefaults.templateUrl = 'path/to/your/template';
+  $confirmModalDefaults.defaultLabels.title = 'Modal Title';
+  $confirmModalDefaults.defaultLabels.ok = 'Yes';
+  $confirmModalDefaults.defaultLabels.cancel = 'No';
 })
 </code></pre>
 
