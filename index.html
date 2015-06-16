@@ -67,7 +67,7 @@ Name: <input type="text" ng-model="name" style="display: block; margin-bottom:10
 <br />
         <p>The <code>confirm</code> directive also supports the overwriting of the default labels for the modal title, OK buttion and Cancel button</p>
 
-<pre><code ng-non-bindable>&lt;button type=&quot;button&quot; ng-click=&quot;delete()&quot; confirm=&quot;Are you sure, {{name}}?&quot; confirm-title=&quot;Please verify, {{name}}?&quot; confirm-ok=&quot;Yes&quot; confirm-cancel=&quot;No&quot;  &gt;Delete&lt;/button&gt;
+<pre><code ng-non-bindable>&lt;button type=&quot;button&quot; ng-click=&quot;delete()&quot; confirm=&quot;Are you sure, {{name}}?&quot; confirm-title=&quot;Please verify, {{name}}?&quot; confirm-ok=&quot;Yes&quot; confirm-cancel=&quot;No&quot;&gt;Delete&lt;/button&gt;
 </code></pre>
 <br />
 
@@ -91,7 +91,7 @@ Name: <input type="text" ng-model="name" style="display: block; margin-bottom:10
     <tr>
       <td>data</td>
       <td>Object</td>
-      <td>(Optional) Data to be used by the modal template/templateUrl. Referenced with "data.". The keys title, ok, and cancel can be used to change the labels used in the modal</td>
+      <td>(Optional) Data to be used by the modal template/templateUrl. Referenced with "data.". The keys "title", "ok", and "cancel" can be used to change the labels used in the modal</td>
     </tr>
     <tr>
       <td>settings</td>
