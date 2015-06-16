@@ -109,6 +109,16 @@ Name: <input type="text" ng-model="name" style="display: block; margin-bottom:10
         });
   }
 })
+
+<div style="display: block; margin-bottom:10px; margin-top: 5px;">
+  <button type="button" ng-click="deleteConfirm()">
+    Try Me (Click "Reset" to clear)
+  </button>
+  <span style="font-weight: bold; font-size: 20px; color: rgb(184, 0, 0); margin-left: 30px">{{deletedConfirm}}</span>
+</div>
+<button type="button" ng-click="deletedConfirm = ''">Reset</button>
+<br />
+
 </code></pre>
 <pre><code ng-non-bindable>.controller("Controller", function($scope, $confirm) {
   $scope.delete = function() {
@@ -121,13 +131,14 @@ Name: <input type="text" ng-model="name" style="display: block; margin-bottom:10
 </code></pre>
 
 <div style="display: block; margin-bottom:10px; margin-top: 5px;">
-  <button type="button" ng-click="deleteConfirm()">
+  <button type="button" ng-click="deleteConfirmWithSettings({title: 'Delete it', ok: 'Yes', cancel: 'No'})">
     Try Me (Click "Reset" to clear)
   </button>
   <span style="font-weight: bold; font-size: 20px; color: rgb(184, 0, 0); margin-left: 30px">{{deletedConfirm}}</span>
 </div>
 <button type="button" ng-click="deletedConfirm = ''">Reset</button>
 <br />
+
 <br />
 
 <h3>
