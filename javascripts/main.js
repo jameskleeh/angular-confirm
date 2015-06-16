@@ -12,4 +12,11 @@ angular.module('myApp', ['angular-confirm'])
         });
     };
     
+    $scope['deleteConfirmWithSettings'] = function(settings) {
+      $confirm(angular.extend({text: 'Are you sure you want to delete?'}, settings || {}))
+        .then(function() {
+          $scope.deletedConfirm = 'Deleted';
+        });
+    };
+    
   });
