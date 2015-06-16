@@ -65,6 +65,10 @@ Name: <input type="text" ng-model="name" style="display: block; margin-bottom:10
 
 <button type="button" ng-click="deleted = ''">Reset</button>
 <br />
+        <p>The <code>confirm</code> directive also supports the overwriting of the default labels for the modal title, OK buttion and Cancel button</p>
+
+<pre><code ng-non-bindable>&lt;button type=&quot;button&quot; ng-click=&quot;delete()&quot; confirm=&quot;Are you sure, {{name}}?&quot; confirm-title=&quot;Please verify, {{name}}?&quot; confirm-ok=&quot;Yes&quot; confirm-cancel=&quot;No&quot;  &gt;Delete&lt;/button&gt;
+</code></pre>
 <br />
 
 
@@ -100,6 +104,15 @@ Name: <input type="text" ng-model="name" style="display: block; margin-bottom:10
 <pre><code ng-non-bindable>.controller("Controller", function($scope, $confirm) {
   $scope.delete = function() {
       $confirm({text: 'Are you sure you want to delete?'})
+        .then(function() {
+          $scope.deletedConfirm = 'Deleted';
+        });
+  }
+})
+</code></pre>
+<pre><code ng-non-bindable>.controller("Controller", function($scope, $confirm) {
+  $scope.delete = function() {
+      $confirm({text: 'Are you sure you want to delete?', title: 'Delete it', ok: 'Yes', cancel: 'No'})
         .then(function() {
           $scope.deletedConfirm = 'Deleted';
         });
