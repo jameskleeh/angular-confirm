@@ -35,7 +35,7 @@ angular.module('angular-confirm', ['ui.bootstrap'])
     settings = angular.extend($confirmModalDefaults, (settings || {}));
 
     data = angular.extend({}, settings.defaultLabels, data || {});
-	
+
     if ('templateUrl' in settings && 'template' in settings) {
       delete settings.template;
     }
@@ -50,7 +50,7 @@ angular.module('angular-confirm', ['ui.bootstrap'])
     priority: 1,
     restrict: 'A',
     scope: {
-      confirmIf: "=",
+      confirmIf: "=", // Two-way binding, by reference only!
       ngClick: '&',
       confirm: '@',
       confirmTitle: '@',
@@ -58,40 +58,24 @@ angular.module('angular-confirm', ['ui.bootstrap'])
       confirmCancel: '@'
     },
     link: function(scope, element, attrs) {
-      function reBind(func) {
-        element.unbind("click").bind("click", function($event) {
-          $event.preventDefault();
-          func();
-        });
-      }
-
-      function bindConfirm() {
-        var data = { text: scope.confirm };
-		if (scope.confirmTitle) {
-			data.title = scope.confirmTitle;
-		}
-		if (scope.confirmOk) {
-			data.ok = scope.confirmOk;
-		}
-		if (scope.confirmCancel) {
-			data.cancel = scope.confirmCancel;
-		}
-        $confirm(data).then(scope.ngClick);
-      }
-
-      if ('confirmIf' in attrs) {
-        scope.$watch('confirmIf', function(newVal) {
-          if (newVal) {
-            reBind(bindConfirm);
-          } else {
-            reBind(function() {
-              scope.$apply(scope.ngClick);
-            });
+      element.unbind("click").bind("click", function($event) {
+        $event.preventDefault();
+        if(angular.isUndefined(scope.confirmIf) || scope.confirmIf) {
+          var data = { text: scope.confirm };
+          if (scope.confirmTitle) {
+            data.title = scope.confirmTitle;
           }
-        });
-      } else {
-        reBind(bindConfirm);
-      }
+          if (scope.confirmOk) {
+            data.ok = scope.confirmOk;
+          }
+          if (scope.confirmCancel) {
+            data.cancel = scope.confirmCancel;
+          }
+          $confirm(data).then(scope.ngClick);
+        } else {
+          scope.$apply(scope.ngClick);
+        }
+      });
     }
   }
 }]);
