@@ -1,7 +1,7 @@
 /*
  * angular-confirm
  * http://schlogen.github.io/angular-confirm/
- * Version: 1.0.2 - 2015-28-04
+ * Version: 1.0.4 - 2015-28-04
  * License: Apache
  */
 angular.module('angular-confirm', ['ui.bootstrap'])
@@ -15,6 +15,7 @@ angular.module('angular-confirm', ['ui.bootstrap'])
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
   };
+
 }])
 .value('$confirmModalDefaults', {
   template: '<div class="modal-header"><h3 class="modal-title">{{data.title}}</h3></div>' +
@@ -58,6 +59,7 @@ angular.module('angular-confirm', ['ui.bootstrap'])
       confirmCancel: '@'
     },
     link: function(scope, element, attrs) {
+
       function reBind(func) {
         element.unbind("click").bind("click", function($event) {
           $event.preventDefault();
@@ -79,7 +81,7 @@ angular.module('angular-confirm', ['ui.bootstrap'])
         $confirm(data).then(scope.ngClick);
       }
 
-      if ('confirmIf' in attrs) {
+      if (attrs.confirmIf && attrs.confirmIf != "") {
         scope.$watch('confirmIf', function(newVal) {
           if (newVal) {
             reBind(bindConfirm);
