@@ -54,6 +54,7 @@ angular.module('angular-confirm', ['ui.bootstrap'])
       confirmIf: "=",
       ngClick: '&',
       confirm: '@',
+      confirmSettings: "=",
       confirmTitle: '@',
       confirmOk: '@',
       confirmCancel: '@'
@@ -78,7 +79,7 @@ angular.module('angular-confirm', ['ui.bootstrap'])
 		if (scope.confirmCancel) {
 			data.cancel = scope.confirmCancel;
 		}
-        $confirm(data).then(scope.ngClick);
+        $confirm(data, scope.confirmSettings || {}).then(scope.ngClick);
       }
 
       if (attrs.confirmIf && attrs.confirmIf != "") {

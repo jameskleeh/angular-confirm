@@ -163,40 +163,71 @@ describe('angular-confirm', function() {
 
         describe('with confirmTitle option', function() {
             beforeEach(angular.mock.inject(function($compile) {
-                element = angular.element('<button type="button" ng-click="click()" confirm="Are you sure?" confirm-title="Hello!">Delete</button>');
+                $scope.name = 'Joe';
+                element = angular.element('<button type="button" ng-click="click()" confirm="Are you sure?" confirm-title="Hello, {{name}}!">Delete</button>');
                 $compile(element)($scope);
                 $scope.$digest();
             }));
 
             it("should resolve the confirmTitle to the title property", function() {
                 element.triggerHandler('click');
-                expect(data.title).toEqual('Hello!');
+                expect(data.title).toEqual('Hello, Joe!');
             });
+
         });
 
         describe('with confirmOk option', function() {
             beforeEach(angular.mock.inject(function($compile) {
-                element = angular.element('<button type="button" ng-click="click()" confirm="Are you sure?" confirm-ok="Okie Dokie!">Delete</button>');
+                $scope.name = 'Joe';
+                element = angular.element('<button type="button" ng-click="click()" confirm="Are you sure?" confirm-ok="Okie Dokie, {{name}}!">Delete</button>');
                 $compile(element)($scope);
                 $scope.$digest();
             }));
 
             it("should resolve the confirmTitle to the title property", function() {
                 element.triggerHandler('click');
-                expect(data.ok).toEqual('Okie Dokie!');
+                expect(data.ok).toEqual('Okie Dokie, Joe!');
             });
         });
 
         describe('with confirmCancel option', function() {
             beforeEach(angular.mock.inject(function($compile) {
-                element = angular.element('<button type="button" ng-click="click()" confirm="Are you sure?" confirm-cancel="No Way!">Delete</button>');
+                $scope.name = 'Joe';
+                element = angular.element('<button type="button" ng-click="click()" confirm="Are you sure?" confirm-cancel="No Way, {{name}}!">Delete</button>');
                 $compile(element)($scope);
                 $scope.$digest();
             }));
 
             it("should resolve the confirmTitle to the title property", function() {
                 element.triggerHandler('click');
-                expect(data.cancel).toEqual('No Way!');
+                expect(data.cancel).toEqual('No Way, Joe!');
+            });
+        });
+
+        describe('with confirmSettings option', function() {
+            beforeEach(angular.mock.inject(function($compile) {
+                $scope.settings = {name: 'Joe'};
+                element = angular.element('<button type="button" ng-click="click()" confirm="Are you sure?" confirm-settings="settings">Delete</button>');
+                $compile(element)($scope);
+                $scope.$digest();
+            }));
+
+            it("should pass the settings to $confirm", function() {
+                element.triggerHandler('click');
+                expect($confirm).toHaveBeenCalledWith({text: "Are you sure?"}, $scope.settings)
+            });
+        });
+
+        describe('with confirmSettings option direct entry', function() {
+            beforeEach(angular.mock.inject(function($compile) {
+                element = angular.element('<button type="button" ng-click="click()" confirm="Are you sure?" confirm-settings="{name: \'Joe\'}">Delete</button>');
+                $compile(element)($scope);
+                $scope.$digest();
+            }));
+
+            it("should pass the settings to $confirm", function() {
+                element.triggerHandler('click');
+                expect($confirm).toHaveBeenCalledWith({text: "Are you sure?"}, {name: "Joe"})
             });
         });
 
