@@ -77,6 +77,17 @@ Name: <input type="text" ng-model="name" style="display: block; margin-bottom:10
 </code></pre>
 <br />
 
+Size: <select ng-model="size" style="display: block; margin-bottom:10px;" ><option value="sm">Small</option><option value="lg">Large</option></select>
+<div style="display: block; margin-bottom:10px;">
+  <button type="button"  ng-click="delete()" confirm-settings="{size: size}" confirm="Are you sure?">
+    Delete (Click "Reset" to clear)
+  </button>
+  <span style="font-weight: bold; font-size: 20px; color: rgb(184, 0, 0); margin-left: 30px">{{deleted}}</span>
+</div>
+
+<button type="button" ng-click="deleted = ''">Reset</button>
+<br />
+
 <h3>
   <a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true">
     <span class="octicon octicon-link"></span></a>
