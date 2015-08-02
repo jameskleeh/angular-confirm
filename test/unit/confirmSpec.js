@@ -88,6 +88,12 @@ describe('angular-confirm', function() {
             expect(settings.template).not.toBeDefined();
         });
 
+        it("should not display cancel button if showCancel evaluates to false", function() {
+            var settings = $confirm({showCancel: false});
+            var data = settings.resolve.data();
+            expect(data.showCancel).toEqual(false);
+        });
+
     });
 
     describe('confirm directive', function() {
@@ -214,7 +220,7 @@ describe('angular-confirm', function() {
 
             it("should pass the settings to $confirm", function() {
                 element.triggerHandler('click');
-                expect($confirm).toHaveBeenCalledWith({text: "Are you sure?"}, $scope.settings)
+                expect($confirm).toHaveBeenCalledWith({text: "Are you sure?", showCancel: true}, $scope.settings)
             });
         });
 
@@ -227,7 +233,34 @@ describe('angular-confirm', function() {
 
             it("should pass the settings to $confirm", function() {
                 element.triggerHandler('click');
-                expect($confirm).toHaveBeenCalledWith({text: "Are you sure?"}, {name: "Joe"})
+                expect($confirm).toHaveBeenCalledWith({text: "Are you sure?", showCancel: true}, {name: "Joe"})
+            });
+        });
+
+        describe('with confirmShowCancel evaluating to true present', function() {
+            beforeEach(angular.mock.inject(function($compile) {
+                element = angular.element('<button type="button" ng-click="click()" confirm="Are you sure?" confirm-settings="{name: \'Joe\'}" confirm-show-cancel="true">Delete</button>');
+                $compile(element)($scope);
+                $scope.$digest();
+            }));
+
+            it("should pass the showCancel data to $confirm", function() {
+                element.triggerHandler('click');
+                expect($confirm).toHaveBeenCalledWith({text: "Are you sure?", showCancel: true}, {name: "Joe"})
+            });
+        });
+
+
+        describe('with confirmShowCancel evaluating to false present', function() {
+            beforeEach(angular.mock.inject(function($compile) {
+                element = angular.element('<button type="button" ng-click="click()" confirm="Are you sure?" confirm-settings="{name: \'Joe\'}" confirm-show-cancel="false">Delete</button>');
+                $compile(element)($scope);
+                $scope.$digest();
+            }));
+
+            it("should pass the settings to $confirm", function() {
+                element.triggerHandler('click');
+                expect($confirm).toHaveBeenCalledWith({text: "Are you sure?", showCancel: false}, {name: "Joe"})
             });
         });
 

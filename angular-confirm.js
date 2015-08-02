@@ -22,7 +22,7 @@ angular.module('angular-confirm', ['ui.bootstrap'])
     '<div class="modal-body">{{data.text}}</div>' +
     '<div class="modal-footer">' +
     '<button class="btn btn-primary" ng-click="ok()">{{data.ok}}</button>' +
-    '<button class="btn btn-default" ng-click="cancel()">{{data.cancel}}</button>' +
+    '<button class="btn btn-default" ng-click="cancel()" ng-hide="data.showCancel === false">{{data.cancel}}</button>' +
     '</div>',
     controller: 'ConfirmModalController',
     defaultLabels: {
@@ -33,6 +33,7 @@ angular.module('angular-confirm', ['ui.bootstrap'])
   })
   .factory('$confirm', ['$modal', '$confirmModalDefaults', function ($modal, $confirmModalDefaults) {
     return function (data, settings) {
+
       settings = angular.extend($confirmModalDefaults, (settings || {}));
 
       data = angular.extend({}, settings.defaultLabels, data || {});
@@ -61,7 +62,8 @@ angular.module('angular-confirm', ['ui.bootstrap'])
         confirmSettings: "=",
         confirmTitle: '@',
         confirmOk: '@',
-        confirmCancel: '@'
+        confirmCancel: '@',
+        confirmShowCancel: "=",
       },
       link: function (scope, element, attrs) {
 
@@ -82,6 +84,12 @@ angular.module('angular-confirm', ['ui.bootstrap'])
             if (scope.confirmCancel) {
               data.cancel = scope.confirmCancel;
             }
+            if (!angular.isUndefined(scope.confirmShowCancel) && scope.confirmShowCancel === false) {
+              data.showCancel = false;
+            } else {
+              data.showCancel = true;
+            }
+
             $confirm(data, scope.confirmSettings || {}).then(scope.ngClick);
           } else {
 

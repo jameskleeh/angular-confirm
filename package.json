@@ -24,8 +24,8 @@
   "homepage": "https://github.com/Schlogen/angular-confirm",
   "devDependencies": {
     "angular": "1.4.2",
-    "angular-bootstrap": "0.12.0",
     "angular-mocks": "^1.4.2",
+    "angular-ui-bootstrap": "0.12.1",
     "gulp": "3.9.0",
     "jasmine-core": "^2.3.4",
     "karma": "0.12.37",
