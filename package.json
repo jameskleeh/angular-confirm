@@ -1,6 +1,6 @@
 {
   "name": "angular-confirm",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Angular Confirm Modal",
   "main": "angular-confirm.js",
   "scripts": {
