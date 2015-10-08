@@ -33,8 +33,9 @@ angular.module('angular-confirm', ['ui.bootstrap'])
   })
   .factory('$confirm', ['$modal', '$confirmModalDefaults', function ($modal, $confirmModalDefaults) {
     return function (data, settings) {
-      settings = angular.extend($confirmModalDefaults, (settings || {}));
-
+      var defaults = angular.copy($confirmModalDefaults);
+      settings = angular.extend(defaults, (settings || {}));
+      
       data = angular.extend({}, settings.defaultLabels, data || {});
 
       if ('templateUrl' in settings && 'template' in settings) {
