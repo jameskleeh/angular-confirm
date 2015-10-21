@@ -4,7 +4,7 @@
  * Version: 1.1.1 - 2015-08-10
  * License: Apache
  */
-angular.module('angular-confirm', ['ui.bootstrap'])
+angular.module('angular-confirm', [ 'ui.bootstrap.modal'])
   .controller('ConfirmModalController', ['$scope', '$modalInstance', 'data', function ($scope, $modalInstance, data) {
     $scope.data = angular.copy(data);
 
