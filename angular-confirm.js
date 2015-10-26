@@ -1,11 +1,17 @@
 /*
  * angular-confirm
- * http://schlogen.github.io/angular-confirm/
- * Version: 1.1.1 - 2015-08-10
- * License: Apache
+ * https://github.com/Schlogen/angular-confirm
+ * @version v1.1.2 - 2015-09-26
+ * @license Apache
  */
-angular.module('angular-confirm', [ 'ui.bootstrap.modal'])
-  .controller('ConfirmModalController', ['$scope', '$modalInstance', 'data', function ($scope, $modalInstance, data) {
+/*
+ * angular-confirm
+ * https://github.com/Schlogen/angular-confirm
+ * @version v1.1.1 - 2015-09-26
+ * @license Apache
+ */
+angular.module('angular-confirm', ['ui.bootstrap.modal'])
+  .controller('ConfirmModalController', function ($scope, $modalInstance, data) {
     $scope.data = angular.copy(data);
 
     $scope.ok = function () {
@@ -16,7 +22,7 @@ angular.module('angular-confirm', [ 'ui.bootstrap.modal'])
       $modalInstance.dismiss('cancel');
     };
 
-  }])
+  })
   .value('$confirmModalDefaults', {
     template: '<div class="modal-header"><h3 class="modal-title">{{data.title}}</h3></div>' +
     '<div class="modal-body">{{data.text}}</div>' +
@@ -31,7 +37,7 @@ angular.module('angular-confirm', [ 'ui.bootstrap.modal'])
       cancel: 'Cancel'
     }
   })
-  .factory('$confirm', ['$modal', '$confirmModalDefaults', function ($modal, $confirmModalDefaults) {
+  .factory('$confirm', function ($modal, $confirmModalDefaults) {
     return function (data, settings) {
       var defaults = angular.copy($confirmModalDefaults);
       settings = angular.extend(defaults, (settings || {}));
@@ -50,8 +56,8 @@ angular.module('angular-confirm', [ 'ui.bootstrap.modal'])
 
       return $modal.open(settings).result;
     };
-  }])
-  .directive('confirm', ['$confirm', function ($confirm) {
+  })
+  .directive('confirm', function ($confirm) {
     return {
       priority: 1,
       restrict: 'A',
@@ -65,7 +71,6 @@ angular.module('angular-confirm', [ 'ui.bootstrap.modal'])
         confirmCancel: '@'
       },
       link: function (scope, element, attrs) {
-
 
         element.unbind("click").bind("click", function ($event) {
 
@@ -92,4 +97,4 @@ angular.module('angular-confirm', [ 'ui.bootstrap.modal'])
 
       }
     }
-  }]);
+  });
