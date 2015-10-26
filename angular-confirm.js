@@ -4,12 +4,6 @@
  * @version v1.1.2 - 2015-09-26
  * @license Apache
  */
-/*
- * angular-confirm
- * https://github.com/Schlogen/angular-confirm
- * @version v1.1.1 - 2015-09-26
- * @license Apache
- */
 angular.module('angular-confirm', ['ui.bootstrap.modal'])
   .controller('ConfirmModalController', function ($scope, $modalInstance, data) {
     $scope.data = angular.copy(data);
