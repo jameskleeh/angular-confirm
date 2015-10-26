@@ -75,6 +75,14 @@ describe('angular-confirm', function() {
             var settings = $confirm({}, {"template": "hello"});
             expect(settings.template).toEqual("hello");
         });
+		
+		it("should not change the defaults", function() {
+            var settings = $confirm({}, {"templateUrl": "hello"});
+            expect(settings.templateUrl).toEqual("hello");
+			expect(settings.template).not.toBeDefined();
+			expect($confirmModalDefaults.template).toBeDefined();
+			expect($confirmModalDefaults.templateUrl).not.toBeDefined();
+        });
 
         it("should override the default labels with the data passed in", function() {
             var settings = $confirm({title: "Title"});

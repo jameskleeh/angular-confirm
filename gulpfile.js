@@ -9,7 +9,7 @@ var gulp = require('gulp'),
 
 gulp.task('test-unit', function(done) {
     karma.start({
-        configFile: __dirname + '\\test\\karma.conf.js',
+        configFile: __dirname + '/test/karma.conf.js',
         singleRun: true
     }, done);
 });
@@ -51,7 +51,7 @@ gulp.task('bump', ['bump-json'], function() {
 	var year = date.getFullYear();
 	  
 	return gulp.src('./angular-confirm.js')
-		.pipe(header(banner, { pkg : pkg, today: (year + '-' + pad(monthIndex) + '-' + pad(day)) } ))
+		.pipe(header(banner, { pkg : pkg, today: (year + '-' + pad(monthIndex+1) + '-' + pad(day)) } ))
 		.pipe(gulp.dest('./'));
 });
 
