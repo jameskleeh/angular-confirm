@@ -1,19 +1,19 @@
 /*
  * angular-confirm
  * https://github.com/Schlogen/angular-confirm
- * @version v1.1.2 - 2015-09-26
+ * @version v1.2.0 - 2015-11-18
  * @license Apache
  */
 angular.module('angular-confirm', ['ui.bootstrap.modal'])
-  .controller('ConfirmModalController', function ($scope, $modalInstance, data) {
+  .controller('ConfirmModalController', function ($scope, $uibModalInstance, data) {
     $scope.data = angular.copy(data);
 
     $scope.ok = function () {
-      $modalInstance.close();
+      $uibModalInstance.close();
     };
 
     $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
+      $uibModalInstance.dismiss('cancel');
     };
 
   })
@@ -31,7 +31,7 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
       cancel: 'Cancel'
     }
   })
-  .factory('$confirm', function ($modal, $confirmModalDefaults) {
+  .factory('$confirm', function ($uibModal, $confirmModalDefaults) {
     return function (data, settings) {
       var defaults = angular.copy($confirmModalDefaults);
       settings = angular.extend(defaults, (settings || {}));
@@ -48,7 +48,7 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
         }
       };
 
-      return $modal.open(settings).result;
+      return $uibModal.open(settings).result;
     };
   })
   .directive('confirm', function ($confirm) {

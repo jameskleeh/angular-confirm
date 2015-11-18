@@ -1,16 +1,16 @@
 describe('angular-confirm', function() {
 
-    var $rootScope, $modal;
+    var $rootScope, $uibModal;
 
     beforeEach(angular.mock.module('angular-confirm', function ($provide) {
 
-        $provide.decorator('$modal', function($delegate) {
-            $modal = {
-                open: jasmine.createSpy('$modal.open', function(settings) {
+        $provide.decorator('$uibModal', function($delegate) {
+            $uibModal = {
+                open: jasmine.createSpy('$uibModal.open', function(settings) {
                     return {result: settings};
                 })
             };
-            return $modal;
+            return $uibModal;
         });
 
         $provide.decorator('$confirm', function($delegate) {
@@ -24,18 +24,18 @@ describe('angular-confirm', function() {
     }));
 
     describe('ConfirmModalController', function() {
-        var $scope, controller, data = {testVal: 1}, $modalInstance;
+        var $scope, controller, data = {testVal: 1}, $uibModalInstance;
 
         beforeEach(angular.mock.inject(function($controller) {
             $scope = $rootScope.$new();
-            $modalInstance = {
-                close: jasmine.createSpy('modalInstance.close'),
-                dismiss: jasmine.createSpy('modalInstance.dismiss'),
+            $uibModalInstance = {
+                close: jasmine.createSpy('$uibModalInstance.close'),
+                dismiss: jasmine.createSpy('$uibModalInstance.dismiss'),
                 result: {
-                    then: jasmine.createSpy('modalInstance.result.then')
+                    then: jasmine.createSpy('$uibModalInstance.result.then')
                 }
             };
-            controller = $controller('ConfirmModalController', {"$scope": $scope, "$modalInstance": $modalInstance, "data": data});
+            controller = $controller('ConfirmModalController', {"$scope": $scope, "$uibModalInstance": $uibModalInstance, "data": data});
         }));
 
         it("should copy the data, not use it as a reference", function() {
@@ -45,12 +45,12 @@ describe('angular-confirm', function() {
 
         it("should call close when $scope.ok is invoked", function() {
             $scope.ok();
-            expect($modalInstance.close).toHaveBeenCalled();
+            expect($uibModalInstance.close).toHaveBeenCalled();
         });
 
         it("should call dismiss when $scope.cancel is invoked", function() {
             $scope.cancel();
-            expect($modalInstance.dismiss).toHaveBeenCalledWith('cancel');
+            expect($uibModalInstance.dismiss).toHaveBeenCalledWith('cancel');
         });
 
     });
@@ -63,12 +63,12 @@ describe('angular-confirm', function() {
             $confirm = _$confirm_;
             $confirm.and.callThrough();
             $confirmModalDefaults = _$confirmModalDefaults_;
-            $modal.open.and.callThrough();
+            $uibModal.open.and.callThrough();
         }));
 
-        it("should call $modal.open", function() {
+        it("should call $uibModal.open", function() {
             $confirm();
-            expect($modal.open).toHaveBeenCalled();
+            expect($uibModal.open).toHaveBeenCalled();
         });
 
         it("should override the defaults with settings passed in", function() {

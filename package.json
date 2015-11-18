@@ -1,6 +1,6 @@
 {
   "name": "angular-confirm",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Angular Confirm Modal",
   "main": "angular-confirm.min.js",
   "scripts": {
@@ -23,9 +23,9 @@
   },
   "homepage": "https://github.com/Schlogen/angular-confirm",
   "devDependencies": {
-    "angular": "1.4.2",
+    "angular": "1.4.7",
     "angular-ui-bootstrap": "0.14.3",
-    "angular-mocks": "^1.4.2",
+    "angular-mocks": "^1.4.7",
     "gulp": "3.9.0",
     "gulp-bump": "^1.0.0",
     "gulp-git": "^1.6.0",
