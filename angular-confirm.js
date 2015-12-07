@@ -4,11 +4,22 @@
  * @version v1.2.1 - 2015-11-18
  * @license Apache
  */
-/* commonjs package manager support (eg componentjs) */
-if (typeof module !== "undefined" && typeof exports !== "undefined" && module.exports === exports) {
-  module.exports = "angular-confirm";
-}
-(function(angular) {
+(function (root, factory) {
+  'use strict';
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['angular'], factory);
+  } else if (typeof module !== 'undefined' && typeof module.exports === 'object') {
+    // CommonJS support (for us webpack/browserify/ComponentJS folks)
+    module.exports = factory(require('angular'));
+  } else {
+    // in the case of no module loading system
+    // then don't worry about creating a global
+    // variable like you would in normal UMD.
+    // It's not really helpful... Just call your factory
+    return factory(root.angular);
+  }
+}(this, function (angular) {
 angular.module('angular-confirm', ['ui.bootstrap.modal'])
   .controller('ConfirmModalController', function ($scope, $uibModalInstance, data) {
     $scope.data = angular.copy(data);
@@ -97,4 +108,4 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
       }
     }
   });
-})(angular);
+}));
