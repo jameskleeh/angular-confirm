@@ -4,6 +4,11 @@
  * @version v1.2.1 - 2015-11-18
  * @license Apache
  */
+/* commonjs package manager support (eg componentjs) */
+if (typeof module !== "undefined" && typeof exports !== "undefined" && module.exports === exports) {
+  module.exports = "angular-confirm";
+}
+(function(angular) {
 angular.module('angular-confirm', ['ui.bootstrap.modal'])
   .controller('ConfirmModalController', function ($scope, $uibModalInstance, data) {
     $scope.data = angular.copy(data);
@@ -92,3 +97,4 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
       }
     }
   });
+})(angular);
