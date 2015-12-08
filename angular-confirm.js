@@ -1,7 +1,7 @@
 /*
  * angular-confirm
  * https://github.com/Schlogen/angular-confirm
- * @version v1.2.1 - 2015-11-18
+ * @version v1.2.2 - 2015-12-08
  * @license Apache
  */
 (function (root, factory) {
