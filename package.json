@@ -17,7 +17,7 @@
     "$modal"
   ],
   "author": "James Kleeh",
-  "license": "Apache",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/Schlogen/angular-confirm/issues"
   },
