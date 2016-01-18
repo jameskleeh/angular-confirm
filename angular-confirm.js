@@ -29,7 +29,9 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
     };
 
     $scope.cancel = function (dismissMessage) {
-      if (angular.isUndefined(dismissMessage)) dismissMessage = 'cancel';
+      if (angular.isUndefined(dismissMessage)) {
+        dismissMessage = 'cancel';
+      }
       $uibModalInstance.dismiss(dismissMessage);
     };
 
