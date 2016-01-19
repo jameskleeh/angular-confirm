@@ -1,5 +1,6 @@
 /*
  * angular-confirm
+ * confirm notes extension by Marco Acchini https://github.com/akka81
  * https://github.com/Schlogen/angular-confirm
  * @version v1.2.2 - 2015-12-08
  * @license Apache
@@ -21,8 +22,9 @@
   }
 }(this, function (angular) {
 angular.module('angular-confirm', ['ui.bootstrap.modal'])
-  .controller('ConfirmModalController', function ($scope, $uibModalInstance, data) {
+  .controller('ConfirmModalController', function ($scope, $uibModalInstance, data, directivescope) {
     $scope.data = angular.copy(data);
+     $scope.directivescope = directivescope;
 
     $scope.ok = function () {
       $uibModalInstance.close();
@@ -34,11 +36,12 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
 
   })
   .value('$confirmModalDefaults', {
-    template: '<div class="modal-header"><h3 class="modal-title">{{data.title}}</h3></div>' +
-    '<div class="modal-body">{{data.text}}</div>' +
+    template:'<div class="modal-header"><h3 class="modal-title">{{data.title}}</h3></div>' +
+    '<div class="modal-body">{{data.text}}<br/>'+
+    '<textarea  class="form-control" rows="10" style=\'width:100%\' ng-if=\"data.isEnabled\" ng-model=\"directivescope.confirmMessage\"></textarea> </div>' +
     '<div class="modal-footer">' +
-    '<button class="btn btn-primary" ng-click="ok()">{{data.ok}}</button>' +
-    '<button class="btn btn-default" ng-click="cancel()">{{data.cancel}}</button>' +
+    '<button class="btn btn-success" ng-click="ok()">{{data.ok}}</button>' +
+    '<button class="btn btn-danger" ng-click="cancel()">{{data.cancel}}</button>' +
     '</div>',
     controller: 'ConfirmModalController',
     defaultLabels: {
@@ -48,7 +51,7 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
     }
   })
   .factory('$confirm', function ($uibModal, $confirmModalDefaults) {
-    return function (data, settings) {
+    return function (data, settings,scope) {
       var defaults = angular.copy($confirmModalDefaults);
       settings = angular.extend(defaults, (settings || {}));
       
@@ -61,7 +64,8 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
       settings.resolve = {
         data: function () {
           return data;
-        }
+        },
+         directivescope: function () { return scope;}
       };
 
       return $uibModal.open(settings).result;
@@ -78,7 +82,8 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
         confirmSettings: "=",
         confirmTitle: '@',
         confirmOk: '@',
-        confirmCancel: '@'
+        confirmCancel: '@',
+        confirmMessage:'='
       },
       link: function (scope, element, attrs) {
 
@@ -98,7 +103,11 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
             if (scope.confirmCancel) {
               data.cancel = scope.confirmCancel;
             }
-            $confirm(data, scope.confirmSettings || {}).then(scope.ngClick);
+             if (scope.confirmMessage!=null)
+                data.isEnabled = true;
+            else
+                data.isEnabled = false;
+            $confirm(data, scope.confirmSettings || {},scope).then(scope.ngClick);
           } else {
 
             scope.$apply(scope.ngClick);
