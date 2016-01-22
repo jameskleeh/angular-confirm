@@ -47,7 +47,8 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
     defaultLabels: {
       title: 'Confirm',
       ok: 'OK',
-      cancel: 'Cancel'
+      cancel: 'Cancel',
+      isEnabled:'false'
     }
   })
   .factory('$confirm',['$uibModal','$confirmModalDefaults', function ($uibModal, $confirmModalDefaults) {
