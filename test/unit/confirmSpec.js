@@ -24,7 +24,7 @@ describe('angular-confirm', function() {
     }));
 
     describe('ConfirmModalController', function() {
-        var $scope, controller, data = {testVal: 1}, $uibModalInstance;
+        var $scope, controller, data = {testVal: 1}, $uibModalInstance, directivescope;
 
         beforeEach(angular.mock.inject(function($controller) {
             $scope = $rootScope.$new();
@@ -35,7 +35,7 @@ describe('angular-confirm', function() {
                     then: jasmine.createSpy('$uibModalInstance.result.then')
                 }
             };
-            controller = $controller('ConfirmModalController', {"$scope": $scope, "$uibModalInstance": $uibModalInstance, "data": data});
+            controller = $controller('ConfirmModalController', {"$scope": $scope, "$uibModalInstance": $uibModalInstance, "data": data,"directivescope":directivescope});
         }));
 
         it("should copy the data, not use it as a reference", function() {
