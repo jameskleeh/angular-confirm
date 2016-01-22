@@ -22,7 +22,7 @@
   }
 }(this, function (angular) {
 angular.module('angular-confirm', ['ui.bootstrap.modal'])
-  .controller('ConfirmModalController', function ($scope, $uibModalInstance, data, directivescope) {
+  .controller('ConfirmModalController',['$scope','$uibModalInstance','data','directivescope' ,function ($scope, $uibModalInstance, data, directivescope) {
     $scope.data = angular.copy(data);
      $scope.directivescope = directivescope;
 
@@ -34,7 +34,7 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
       $uibModalInstance.dismiss('cancel');
     };
 
-  })
+  }])
   .value('$confirmModalDefaults', {
     template:'<div class="modal-header"><h3 class="modal-title">{{data.title}}</h3></div>' +
     '<div class="modal-body">{{data.text}}<br/>'+
@@ -50,7 +50,7 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
       cancel: 'Cancel'
     }
   })
-  .factory('$confirm', function ($uibModal, $confirmModalDefaults) {
+  .factory('$confirm',['$uibModal','$confirmModalDefaults', function ($uibModal, $confirmModalDefaults) {
     return function (data, settings,scope) {
       var defaults = angular.copy($confirmModalDefaults);
       settings = angular.extend(defaults, (settings || {}));
@@ -70,8 +70,8 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
 
       return $uibModal.open(settings).result;
     };
-  })
-  .directive('confirm', function ($confirm) {
+  }])
+  .directive('confirm', ['$confirm',function ($confirm) {
     return {
       priority: 1,
       restrict: 'A',
@@ -116,5 +116,5 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
 
       }
     }
-  });
+  }]);
 }));
