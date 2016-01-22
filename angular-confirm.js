@@ -2,7 +2,7 @@
  * angular-confirm
  * confirm notes extension by Marco Acchini https://github.com/akka81
  * https://github.com/Schlogen/angular-confirm
- * @version v1.2.2 - 2015-12-08
+ * @version v1.3 - 2016-01-23
  * @license Apache
  */
 (function (root, factory) {
