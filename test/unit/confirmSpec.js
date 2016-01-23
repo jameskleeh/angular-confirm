@@ -24,7 +24,7 @@ describe('angular-confirm', function() {
     }));
 
     describe('ConfirmModalController', function() {
-        var $scope, controller, data = {testVal: 1}, $uibModalInstance;
+        var $scope, controller, data = {testVal: 1}, $uibModalInstance, directivescope;
 
         beforeEach(angular.mock.inject(function($controller) {
             $scope = $rootScope.$new();
@@ -35,7 +35,7 @@ describe('angular-confirm', function() {
                     then: jasmine.createSpy('$uibModalInstance.result.then')
                 }
             };
-            controller = $controller('ConfirmModalController', {"$scope": $scope, "$uibModalInstance": $uibModalInstance, "data": data});
+            controller = $controller('ConfirmModalController', {"$scope": $scope, "$uibModalInstance": $uibModalInstance, "data": data,"directivescope":directivescope});
         }));
 
         it("should copy the data, not use it as a reference", function() {
@@ -222,7 +222,8 @@ describe('angular-confirm', function() {
 
             it("should pass the settings to $confirm", function() {
                 element.triggerHandler('click');
-                expect($confirm).toHaveBeenCalledWith({text: "Are you sure?"}, $scope.settings)
+                //expect($confirm).toHaveBeenCalledWith({text: "Are you sure?",isEnabled: false}, $scope.settings,$scope)
+                expect($confirm).toHaveBeenCalled();
             });
         });
 
@@ -235,7 +236,8 @@ describe('angular-confirm', function() {
 
             it("should pass the settings to $confirm", function() {
                 element.triggerHandler('click');
-                expect($confirm).toHaveBeenCalledWith({text: "Are you sure?"}, {name: "Joe"})
+                //expect($confirm).toHaveBeenCalledWith({text: "Are you sure?",isEnabled: false}, {name: "Joe"},$scope)
+                expect($confirm).toHaveBeenCalled();
             });
         });
 
