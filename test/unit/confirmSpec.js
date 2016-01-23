@@ -222,7 +222,7 @@ describe('angular-confirm', function() {
 
             it("should pass the settings to $confirm", function() {
                 element.triggerHandler('click');
-                expect($confirm).toHaveBeenCalledWith({text: "Are you sure?",isEnabled: false}, $scope.settings,$scope)
+                expect($confirm).toHaveBeenCalledWith({text: "Are you sure?",isEnabled: false}, $scope.settings,$rootScope)
             });
         });
 
@@ -235,7 +235,7 @@ describe('angular-confirm', function() {
 
             it("should pass the settings to $confirm", function() {
                 element.triggerHandler('click');
-                expect($confirm).toHaveBeenCalledWith({text: "Are you sure?",isEnabled: false}, {name: "Joe"},$scope)
+                expect($confirm).toHaveBeenCalledWith({text: "Are you sure?",isEnabled: false}, {name: "Joe"},$rootScope)
             });
         });
 
