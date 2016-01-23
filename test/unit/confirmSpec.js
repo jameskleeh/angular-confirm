@@ -235,7 +235,7 @@ describe('angular-confirm', function() {
 
             it("should pass the settings to $confirm", function() {
                 element.triggerHandler('click');
-                expect($confirm).toHaveBeenCalledWith({text: "Are you sure?",isEnabled:'false'}, {name: "Joe"})
+                expect($confirm).toHaveBeenCalledWith({text: "Are you sure?",isEnabled:false}, {name: "Joe"})
             });
         });
 
