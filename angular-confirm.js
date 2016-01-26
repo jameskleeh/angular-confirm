@@ -24,12 +24,15 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
   .controller('ConfirmModalController', function ($scope, $uibModalInstance, data) {
     $scope.data = angular.copy(data);
 
-    $scope.ok = function () {
-      $uibModalInstance.close();
+    $scope.ok = function (closeMessage) {
+      $uibModalInstance.close(closeMessage);
     };
 
-    $scope.cancel = function () {
-      $uibModalInstance.dismiss('cancel');
+    $scope.cancel = function (dismissMessage) {
+      if (angular.isUndefined(dismissMessage)) {
+        dismissMessage = 'cancel';
+      }
+      $uibModalInstance.dismiss(dismissMessage);
     };
 
   })
