@@ -1,4 +1,4 @@
-angular.module('myApp', ['angular-confirm'])
+angular.module('myApp', ['angular-confirm', 'ui.bootstrap.tpls'])
   .controller('MyController', function($scope, $confirm) {
 
     $scope['delete'] = function() {
