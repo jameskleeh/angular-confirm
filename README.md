@@ -13,3 +13,9 @@ This module requires the Angular-UI $modal service http://angular-ui.github.io/b
 To install with bower: `bower install angular-confirm-modal`
 
 [DEMO](http://schlogen.github.io/angular-confirm)
+
+Then simply add a dependency to the `angular-confirm` module
+
+```
+angular.module('myApp', ['angular-confirm'])
+```
