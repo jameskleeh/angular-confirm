@@ -33,7 +33,7 @@
       <section id="main_content" class="inner">
         <h3><a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h3>
 
-        <p>This module depends on Angular-UI bootstrap for its <code>$modal</code> service and can be used in two different ways: As a service or as a directive.</p>
+        <p>This module depends on Angular-UI bootstrap for its <code>$uibModal</code> service and can be used in two different ways: As a service or as a directive.</p>
 <br />
         <h3><a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>As a Directive</h3>
 
@@ -112,7 +112,7 @@ Size: <select ng-model="size" style="display: block; margin-bottom:10px;" ><opti
     <tr>
       <td>settings</td>
       <td>Object</td>
-      <td>(Optional) Settings that will be passed to $modal</td>
+      <td>(Optional) Settings that will be passed to $uibModal</td>
     </tr>
   </tbody>
 </table>
@@ -160,7 +160,7 @@ Size: <select ng-model="size" style="display: block; margin-bottom:10px;" ><opti
 <h3>
 <a id="rather-drive-stick" class="anchor" href="#rather-drive-stick" aria-hidden="true"><span class="octicon octicon-link"></span></a>Settings</h3>
 
-<p>You can inject and modify <code>$confirmModalDefaults</code> to change the default settings that get passed to the <code>$modal</code> service.</p>
+<p>You can inject and modify <code>$confirmModalDefaults</code> to change the default settings that get passed to the <code>$uibModal</code> service.</p>
 
 <pre><code ng-non-bindable>.run(function($confirmModalDefaults) {
   $confirmModalDefaults.templateUrl = 'path/to/your/template';
@@ -198,7 +198,7 @@ Size: <select ng-model="size" style="display: block; margin-bottom:10px;" ><opti
     </div>
 
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.js"></script>
     <script src="javascripts/angular-confirm.js"></script>
     <script src="javascripts/main.js"></script>
 
