@@ -4,18 +4,25 @@ angular-confirm
 
 Confirm modal dialog for AngularJS
 
-To use ui-bootstrap < 0.14.x you must keep on the 1.1.x release track for this module
+See [demo](http://schlogen.github.io/angular-confirm)
 
-This module requires the Angular-UI $modal service http://angular-ui.github.io/bootstrap/#/modal.
+## Install
+This module requires the Angular-UI-Bootstrap [$modal service](http://angular-ui.github.io/bootstrap/#/modal) and styles from [Bootstrap](https://getbootstrap.com/) 3.x.
 
-[NPM](https://www.npmjs.com/package/angular-confirm)
+Note: to use ui-bootstrap < 0.14.x you must keep on the 1.1.x release track for this module.
 
-To install with bower: `bower install angular-confirm-modal`
-
-[DEMO](http://schlogen.github.io/angular-confirm)
-
-Then simply add a dependency to the `angular-confirm` module
-
+To install with [npm](https://www.npmjs.com/package/angular-confirm):
 ```
-angular.module('myApp', ['angular-confirm'])
+npm install angular-confirm
+```
+
+To install with bower: 
+```
+bower install angular-confirm-modal
+```
+
+Then simply add a dependency to the `angular-confirm` module:
+
+```javascript
+angular.module('myApp', ['angular-confirm']);
 ```
