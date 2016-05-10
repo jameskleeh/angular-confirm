@@ -81,9 +81,8 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
 
         element.unbind("click").bind("click", function ($event) {
 
-          $event.preventDefault();
-
-          if (angular.isUndefined(scope.confirmIf) || scope.confirmIf) {
+          if ((angular.isUndefined(scope.confirmIf) || scope.confirmIf) && !element.allowClickOverride) {
+            $event.preventDefault();
 
             var data = {text: scope.confirm};
             if (scope.confirmTitle) {
@@ -95,9 +94,12 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
             if (scope.confirmCancel) {
               data.cancel = scope.confirmCancel;
             }
-            $confirm(data, scope.confirmSettings || {}).then(scope.ngClick);
+            $confirm(data, scope.confirmSettings || {}).then(function(){
+              element.allowClickOverride = true;
+              $timeout(function(){element.click()});
+            });
           } else {
-
+            element.allowClickOverride = false;
             scope.$apply(scope.ngClick);
           }
         });
