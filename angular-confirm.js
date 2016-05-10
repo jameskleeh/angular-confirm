@@ -81,7 +81,7 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
 
         element.unbind("click").bind("click", function ($event) {
 
-          if ((angular.isUndefined(scope.confirmIf) || scope.confirmIf) && !element['confirm-passthru']) {
+          if ((angular.isUndefined(scope.confirmIf) || scope.confirmIf) && !element.allowClickOverride) {
             $event.preventDefault();
 
             var data = {text: scope.confirm};
@@ -95,11 +95,11 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
               data.cancel = scope.confirmCancel;
             }
             $confirm(data, scope.confirmSettings || {}).then(function(){
-                element['confirm-passthru'] = true;
-                $timeout(function(){element.click()}, 0);
+              element.allowClickOverride = true;
+              $timeout(function(){element.click()});
             });
           } else {
-            element['confirm-passthru'] = false;
+            element.allowClickOverride = false;
             scope.$apply(scope.ngClick);
           }
         });
