@@ -79,6 +79,15 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
       },
       link: function (scope, element, attrs) {
 
+        function onSuccess() {
+          var rawEl = element[0];
+          //Event is prevented from default action which causes checkboxes not to check
+          if (typeof rawEl.checked != "undefined") {
+            rawEl.checked = !rawEl.checked;
+          }
+          scope.ngClick();
+        }
+
         element.unbind("click").bind("click", function ($event) {
 
           $event.preventDefault();
@@ -95,10 +104,10 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
             if (scope.confirmCancel) {
               data.cancel = scope.confirmCancel;
             }
-            $confirm(data, scope.confirmSettings || {}).then(scope.ngClick);
+            $confirm(data, scope.confirmSettings || {}).then(onSuccess);
           } else {
 
-            scope.$apply(scope.ngClick);
+            scope.$apply(onSuccess);
           }
         });
 

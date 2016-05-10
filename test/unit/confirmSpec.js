@@ -239,6 +239,62 @@ describe('angular-confirm', function() {
             });
         });
 
+
+        describe('with checkbox', function() {
+
+            beforeEach(angular.mock.inject(function($compile) {
+                element = angular.element('<input type="checkbox" ng-click="click()" confirm="Are you sure?" />');
+                $compile(element)($scope);
+                $scope.$digest();
+            }));
+
+            it("should call confirm on click and not call the function", function() {
+                element.triggerHandler('click');
+                expect($scope.click).not.toHaveBeenCalled();
+                expect($confirm).toHaveBeenCalled();
+                expect(element[0].checked).toBe(false);
+            });
+
+        });
+
+        describe('with checkbox and confirm if false', function() {
+
+            beforeEach(angular.mock.inject(function($compile) {
+                element = angular.element('<input type="checkbox" ng-click="click()" confirm="Are you sure?" confirm-if="truthy" />');
+                $compile(element)($scope);
+                $scope.$digest();
+            }));
+
+            it("should set the checkbox to checked", function() {
+                expect(element[0].checked).toBe(false);
+                $scope.truthy = false;
+                $scope.$apply();
+                element.triggerHandler('click');
+                expect($scope.click).toHaveBeenCalled();
+                expect($confirm).not.toHaveBeenCalled();
+                expect(element[0].checked).toBe(true);
+            });
+        });
+
+        describe('with checkbox already checked and confirm if false', function() {
+
+            beforeEach(angular.mock.inject(function($compile) {
+                element = angular.element('<input type="checkbox" ng-click="click()" confirm="Are you sure?" confirm-if="truthy" checked />');
+                $compile(element)($scope);
+                $scope.$digest();
+            }));
+
+            it("should set the checkbox to checked", function() {
+                expect(element[0].checked).toBe(true);
+                $scope.truthy = false;
+                $scope.$apply();
+                element.triggerHandler('click');
+                expect($scope.click).toHaveBeenCalled();
+                expect($confirm).not.toHaveBeenCalled();
+                expect(element[0].checked).toBe(false);
+            });
+        });
+
     });
 
 });
