@@ -64,7 +64,7 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
       return $uibModal.open(settings).result;
     };
   })
-  .directive('confirm', function ($confirm) {
+  .directive('confirm', function ($confirm, $timeout) {
     return {
       priority: 1,
       restrict: 'A',
@@ -81,9 +81,14 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
 
         function onSuccess() {
           var rawEl = element[0];
-          //Event is prevented from default action which causes checkboxes not to check
-          if (typeof rawEl.checked != "undefined") {
-            rawEl.checked = !rawEl.checked;
+          if (["checkbox", "radio"].indexOf(rawEl.type) != -1) {
+            var model = element.data('$ngModelController');
+            if (model) {
+              model.$setViewValue(!rawEl.checked);
+              model.$render();
+            } else {
+              rawEl.checked = !rawEl.checked;
+            }
           }
           scope.ngClick();
         }
@@ -92,23 +97,26 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
 
           $event.preventDefault();
 
-          if (angular.isUndefined(scope.confirmIf) || scope.confirmIf) {
+          $timeout(function() {
 
-            var data = {text: scope.confirm};
-            if (scope.confirmTitle) {
-              data.title = scope.confirmTitle;
+            if (angular.isUndefined(scope.confirmIf) || scope.confirmIf) {
+              var data = {text: scope.confirm};
+              if (scope.confirmTitle) {
+                data.title = scope.confirmTitle;
+              }
+              if (scope.confirmOk) {
+                data.ok = scope.confirmOk;
+              }
+              if (scope.confirmCancel) {
+                data.cancel = scope.confirmCancel;
+              }
+              $confirm(data, scope.confirmSettings || {}).then(onSuccess);
+            } else {
+              scope.$apply(onSuccess);
             }
-            if (scope.confirmOk) {
-              data.ok = scope.confirmOk;
-            }
-            if (scope.confirmCancel) {
-              data.cancel = scope.confirmCancel;
-            }
-            $confirm(data, scope.confirmSettings || {}).then(onSuccess);
-          } else {
 
-            scope.$apply(onSuccess);
-          }
+          });
+
         });
 
       }

@@ -99,10 +99,11 @@ describe('angular-confirm', function() {
     });
 
     describe('confirm directive', function() {
-        var $scope, element, $confirm, data;
+        var $scope, element, $confirm, data, $timeout;
 
-        beforeEach(angular.mock.inject(function (_$confirm_, $compile) {
+        beforeEach(angular.mock.inject(function (_$confirm_, _$timeout_) {
             $confirm = _$confirm_;
+            $timeout = _$timeout_;
 
             $confirm.and.callFake(function(d) {
                 data = d;
@@ -123,6 +124,7 @@ describe('angular-confirm', function() {
 
             it("should resolve the name to the text property", function() {
                 element.triggerHandler('click');
+                $timeout.flush();
                 expect(data.text).toEqual('Are you sure, Joe?');
             });
         });
@@ -137,6 +139,7 @@ describe('angular-confirm', function() {
 
             it("should call confirm on click and not call the function", function() {
                 element.triggerHandler('click');
+                $timeout.flush();
                 expect($scope.click).not.toHaveBeenCalled();
                 expect($confirm).toHaveBeenCalled();
             });
@@ -155,6 +158,7 @@ describe('angular-confirm', function() {
                 $scope.truthy = true;
                 $scope.$apply();
                 element.triggerHandler('click');
+                $timeout.flush();
                 expect($scope.click).not.toHaveBeenCalled();
                 expect($confirm).toHaveBeenCalled();
             });
@@ -163,6 +167,7 @@ describe('angular-confirm', function() {
                 $scope.truthy = false;
                 $scope.$apply();
                 element.triggerHandler('click');
+                $timeout.flush();
                 expect($scope.click).toHaveBeenCalled();
                 expect($confirm).not.toHaveBeenCalled();
             });
@@ -179,6 +184,7 @@ describe('angular-confirm', function() {
 
             it("should resolve the confirmTitle to the title property", function() {
                 element.triggerHandler('click');
+                $timeout.flush();
                 expect(data.title).toEqual('Hello, Joe!');
             });
 
@@ -194,6 +200,7 @@ describe('angular-confirm', function() {
 
             it("should resolve the confirmTitle to the title property", function() {
                 element.triggerHandler('click');
+                $timeout.flush();
                 expect(data.ok).toEqual('Okie Dokie, Joe!');
             });
         });
@@ -208,6 +215,7 @@ describe('angular-confirm', function() {
 
             it("should resolve the confirmTitle to the title property", function() {
                 element.triggerHandler('click');
+                $timeout.flush();
                 expect(data.cancel).toEqual('No Way, Joe!');
             });
         });
@@ -222,6 +230,7 @@ describe('angular-confirm', function() {
 
             it("should pass the settings to $confirm", function() {
                 element.triggerHandler('click');
+                $timeout.flush();
                 expect($confirm).toHaveBeenCalledWith({text: "Are you sure?"}, $scope.settings)
             });
         });
@@ -235,6 +244,7 @@ describe('angular-confirm', function() {
 
             it("should pass the settings to $confirm", function() {
                 element.triggerHandler('click');
+                $timeout.flush();
                 expect($confirm).toHaveBeenCalledWith({text: "Are you sure?"}, {name: "Joe"})
             });
         });
@@ -250,6 +260,7 @@ describe('angular-confirm', function() {
 
             it("should call confirm on click and not call the function", function() {
                 element.triggerHandler('click');
+                $timeout.flush();
                 expect($scope.click).not.toHaveBeenCalled();
                 expect($confirm).toHaveBeenCalled();
                 expect(element[0].checked).toBe(false);
@@ -258,6 +269,73 @@ describe('angular-confirm', function() {
         });
 
         describe('with checkbox and confirm if false', function() {
+
+            beforeEach(angular.mock.inject(function($compile) {
+                element = angular.element('<input type="checkbox" ng-click="click()" ng-model="checked" confirm="Are you sure?" confirm-if="truthy" />');
+                $compile(element)($scope);
+                $scope.$digest();
+            }));
+
+            it("should set the checkbox to checked", function() {
+                expect($scope.checked).not.toBeDefined();
+                expect(element[0].checked).toBe(false);
+                $scope.truthy = false;
+                $scope.$apply();
+                element.triggerHandler('click');
+                $timeout.flush();
+                expect($scope.click).toHaveBeenCalled();
+                expect($confirm).not.toHaveBeenCalled();
+                expect(element[0].checked).toBe(true);
+                expect($scope.checked).toBe(true);
+            });
+        });
+
+        describe('with checkbox already checked and confirm if false', function() {
+
+            beforeEach(angular.mock.inject(function($compile) {
+                $scope.checked = true;
+                element = angular.element('<input type="checkbox" ng-click="click()" ng-model="checked" confirm="Are you sure?" confirm-if="truthy" checked />');
+                $compile(element)($scope);
+                $scope.$digest();
+            }));
+
+            it("should set the checkbox to checked", function() {
+                expect($scope.checked).toBe(true);
+                expect(element[0].checked).toBe(true);
+                $scope.truthy = false;
+                $scope.$apply();
+                element.triggerHandler('click');
+                $timeout.flush();
+                expect($scope.click).toHaveBeenCalled();
+                expect($confirm).not.toHaveBeenCalled();
+                expect(element[0].checked).toBe(false);
+                expect($scope.checked).toBe(false);
+            });
+        });
+
+        describe('with checkbox and confirm if false and ng-true-value/ng-false-value', function() {
+
+            beforeEach(angular.mock.inject(function($compile) {
+                element = angular.element('<input type="checkbox" ng-click="click()" ng-model="checked" confirm="Are you sure?" confirm-if="truthy" ng-true-value="\'YES\'" ng-false-value="\'NO\'" />');
+                $compile(element)($scope);
+                $scope.$digest();
+            }));
+
+            it("should set the checkbox to checked", function() {
+                expect($scope.checked).not.toBeDefined();
+                expect(element[0].checked).toBe(false);
+                $scope.truthy = false;
+                $scope.$apply();
+                element.triggerHandler('click');
+                $timeout.flush();
+                expect($scope.click).toHaveBeenCalled();
+                expect($confirm).not.toHaveBeenCalled();
+                expect(element[0].checked).toBe(true);
+                expect($scope.checked).toBe("YES");
+            });
+        });
+
+        describe('with checkbox without ngModel and confirm if false', function() {
 
             beforeEach(angular.mock.inject(function($compile) {
                 element = angular.element('<input type="checkbox" ng-click="click()" confirm="Are you sure?" confirm-if="truthy" />');
@@ -270,13 +348,14 @@ describe('angular-confirm', function() {
                 $scope.truthy = false;
                 $scope.$apply();
                 element.triggerHandler('click');
+                $timeout.flush();
                 expect($scope.click).toHaveBeenCalled();
                 expect($confirm).not.toHaveBeenCalled();
                 expect(element[0].checked).toBe(true);
             });
         });
 
-        describe('with checkbox already checked and confirm if false', function() {
+        describe('with checkbox without ngModel already checked and confirm if false', function() {
 
             beforeEach(angular.mock.inject(function($compile) {
                 element = angular.element('<input type="checkbox" ng-click="click()" confirm="Are you sure?" confirm-if="truthy" checked />');
@@ -289,6 +368,7 @@ describe('angular-confirm', function() {
                 $scope.truthy = false;
                 $scope.$apply();
                 element.triggerHandler('click');
+                $timeout.flush();
                 expect($scope.click).toHaveBeenCalled();
                 expect($confirm).not.toHaveBeenCalled();
                 expect(element[0].checked).toBe(false);
@@ -297,4 +377,7 @@ describe('angular-confirm', function() {
 
     });
 
+
+
 });
+
