@@ -17,9 +17,10 @@ gulp.task('test-unit', function(done) {
 gulp.task('dest', function() {
 	gulp.src('./angular-confirm.js')
 		.pipe(ngAnnotate())
+		.pipe(gulp.dest('./dist/'))
 		.pipe(uglify({preserveComments: 'all'}))
 		.pipe(rename("angular-confirm.min.js"))
-		.pipe(gulp.dest('./'))
+		.pipe(gulp.dest('./dist/'));
 });
 
 gulp.task('bump-json', function (done) {

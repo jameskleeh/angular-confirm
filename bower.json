@@ -1,6 +1,6 @@
 {
   "name": "angular-confirm-modal",
-  "main": "angular-confirm.js",
+  "main": "dist/angular-confirm.js",
   "version": "1.2.4",
   "ignore": [
     "test",
@@ -9,7 +9,8 @@
     "LICENSE",
     ".gitignore",
     "*.md",
-    ".travis.yml"
+    ".travis.yml",
+    "angular-confirm.js"
   ],
   "homepage": "https://github.com/Schlogen/angular-confirm",
   "authors": [
