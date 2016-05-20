@@ -1,7 +1,7 @@
 /*
  * angular-confirm
  * https://github.com/Schlogen/angular-confirm
- * @version v1.2.4 - 2016-05-11
+ * @version v1.2.5 - 2016-05-20
  * @license Apache
  */
 (function (root, factory) {
@@ -15,7 +15,7 @@
   }
 }(this, function (angular) {
 angular.module('angular-confirm', ['ui.bootstrap.modal'])
-  .controller('ConfirmModalController', function ($scope, $uibModalInstance, data) {
+  .controller('ConfirmModalController', ["$scope", "$uibModalInstance", "data", function ($scope, $uibModalInstance, data) {
     $scope.data = angular.copy(data);
 
     $scope.ok = function (closeMessage) {
@@ -29,7 +29,7 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
       $uibModalInstance.dismiss(dismissMessage);
     };
 
-  })
+  }])
   .value('$confirmModalDefaults', {
     template: '<div class="modal-header"><h3 class="modal-title">{{data.title}}</h3></div>' +
     '<div class="modal-body">{{data.text}}</div>' +
@@ -44,7 +44,7 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
       cancel: 'Cancel'
     }
   })
-  .factory('$confirm', function ($uibModal, $confirmModalDefaults) {
+  .factory('$confirm', ["$uibModal", "$confirmModalDefaults", function ($uibModal, $confirmModalDefaults) {
     return function (data, settings) {
       var defaults = angular.copy($confirmModalDefaults);
       settings = angular.extend(defaults, (settings || {}));
@@ -63,8 +63,8 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
 
       return $uibModal.open(settings).result;
     };
-  })
-  .directive('confirm', function ($confirm, $timeout) {
+  }])
+  .directive('confirm', ["$confirm", "$timeout", function ($confirm, $timeout) {
     return {
       priority: 1,
       restrict: 'A',
@@ -121,5 +121,5 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
 
       }
     }
-  });
+  }]);
 }));
