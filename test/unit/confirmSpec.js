@@ -231,7 +231,7 @@ describe('angular-confirm', function() {
             it("should pass the settings to $confirm", function() {
                 element.triggerHandler('click');
                 $timeout.flush();
-                expect($confirm).toHaveBeenCalledWith({text: "Are you sure?"}, $scope.settings)
+                expect($confirm).toHaveBeenCalledWith({text: "Are you sure?", okClass: "primary", cancelClass: "default"}, $scope.settings)
             });
         });
 
@@ -245,7 +245,7 @@ describe('angular-confirm', function() {
             it("should pass the settings to $confirm", function() {
                 element.triggerHandler('click');
                 $timeout.flush();
-                expect($confirm).toHaveBeenCalledWith({text: "Are you sure?"}, {name: "Joe"})
+                expect($confirm).toHaveBeenCalledWith({text: "Are you sure?", okClass: "primary", cancelClass: "default"}, {name: "Joe"})
             });
         });
 
