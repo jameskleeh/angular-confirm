@@ -96,6 +96,22 @@ describe('angular-confirm', function() {
             expect(settings.template).not.toBeDefined();
         });
 
+        it("should provide default button class names", function(){
+            expect($confirmModalDefaults.defaultLabels.okClass).toEqual('primary');
+            expect($confirmModalDefaults.defaultLabels.cancelClass).toEqual('default');
+            var settings = $confirm({});
+            var data = settings.resolve.data();
+            expect(data.okClass).toEqual('primary');
+            expect(data.cancelClass).toEqual('default');
+        });
+
+        it("should override default class names", function(){
+            var settings = $confirm({okClass: "danger", cancelClass: "warning"});
+            var data = settings.resolve.data();
+            expect(data.okClass).toEqual('danger');
+            expect(data.cancelClass).toEqual('warning');
+        });
+
     });
 
     describe('confirm directive', function() {
@@ -205,6 +221,25 @@ describe('angular-confirm', function() {
             });
         });
 
+        describe('with confirmOk and confirmOkClass option', function() {
+            beforeEach(angular.mock.inject(function($compile) {
+                $scope.name = 'Joe';
+                element = angular.element('<button type="button" ng-click="click()" confirm="Are you sure?" confirm-ok="Okie Dokie, {{name}}!" confirm-ok-class="danger">Delete</button>');
+                $compile(element)($scope);
+                $scope.$digest();
+            }));
+
+            it("should resolve the confirmTitle to the title property", function() {
+                element.triggerHandler('click');
+                $timeout.flush();
+                expect(data.ok).toEqual('Okie Dokie, Joe!');
+            });
+
+            it("should use confirmOkClass to the provided value", function(){
+                expect(data.okClass).toEqual('danger');
+            });
+        });
+
         describe('with confirmCancel option', function() {
             beforeEach(angular.mock.inject(function($compile) {
                 $scope.name = 'Joe';
@@ -220,6 +255,25 @@ describe('angular-confirm', function() {
             });
         });
 
+        describe('with confirmCancel and cancelClass option', function() {
+            beforeEach(angular.mock.inject(function($compile) {
+                $scope.name = 'Joe';
+                element = angular.element('<button type="button" ng-click="click()" confirm="Are you sure?" confirm-cancel="No Way, {{name}}!" confirm-cancel-class="warning">Delete</button>');
+                $compile(element)($scope);
+                $scope.$digest();
+            }));
+
+            it("should resolve the confirmTitle to the title property", function() {
+                element.triggerHandler('click');
+                $timeout.flush();
+                expect(data.cancel).toEqual('No Way, Joe!');
+            });
+
+            it("should use confirmCancelClass to the provided value", function(){
+                expect(data.cancelClass).toEqual('warning');
+            });
+        });
+
         describe('with confirmSettings option', function() {
             beforeEach(angular.mock.inject(function($compile) {
                 $scope.settings = {name: 'Joe'};
@@ -231,7 +285,7 @@ describe('angular-confirm', function() {
             it("should pass the settings to $confirm", function() {
                 element.triggerHandler('click');
                 $timeout.flush();
-                expect($confirm).toHaveBeenCalledWith({text: "Are you sure?", okClass: "primary", cancelClass: "default"}, $scope.settings)
+                expect($confirm).toHaveBeenCalledWith({text: "Are you sure?"}, $scope.settings)
             });
         });
 
@@ -245,7 +299,7 @@ describe('angular-confirm', function() {
             it("should pass the settings to $confirm", function() {
                 element.triggerHandler('click');
                 $timeout.flush();
-                expect($confirm).toHaveBeenCalledWith({text: "Are you sure?", okClass: "primary", cancelClass: "default"}, {name: "Joe"})
+                expect($confirm).toHaveBeenCalledWith({text: "Are you sure?"}, {name: "Joe"})
             });
         });
 

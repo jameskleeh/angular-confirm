@@ -41,7 +41,9 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
     defaultLabels: {
       title: 'Confirm',
       ok: 'OK',
-      cancel: 'Cancel'
+      cancel: 'Cancel',
+      okClass: 'primary',
+      cancelClass: 'default'
     }
   })
   .factory('$confirm', ["$uibModal", "$confirmModalDefaults", function ($uibModal, $confirmModalDefaults) {
@@ -114,13 +116,9 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
               }
               if (scope.confirmOkClass) {
                 data.okClass = scope.confirmOkClass;
-              } else {
-                data.okClass = 'primary';
               }
               if (scope.confirmCancelClass) {
                 data.cancelClass = scope.confirmCancelClass;
-              } else {
-                data.cancelClass = 'default';
               }
               $confirm(data, scope.confirmSettings || {}).then(onSuccess);
             } else {
