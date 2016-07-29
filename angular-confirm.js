@@ -82,7 +82,7 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
         ngClick: '&',
         confirm: '@',
         confirmSettings: "=",
-        confirmTemplateName: "=",
+        confirmTemplateName: "@",
         confirmTitle: '@',
         confirmOk: '@',
         confirmCancel: '@'
