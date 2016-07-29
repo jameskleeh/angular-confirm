@@ -42,7 +42,8 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
       title: 'Confirm',
       ok: 'OK',
       cancel: 'Cancel'
-    }
+    },
+    additionalTemplates: {}
   })
   .factory('$confirm', ["$uibModal", "$confirmModalDefaults", function ($uibModal, $confirmModalDefaults) {
     return function (data, settings) {
@@ -50,6 +51,14 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
       settings = angular.extend(defaults, (settings || {}));
       
       data = angular.extend({}, settings.defaultLabels, data || {});
+
+      if(data.templateName){
+        var customTemplateDefinition = settings.additionalTemplates[data.templateName];
+        if(customTemplateDefinition != undefined) {
+          settings.template = customTemplateDefinition.template;
+          settings.templateUrl = customTemplateDefinition.templateUrl;
+        }
+      }
 
       if ('templateUrl' in settings && 'template' in settings) {
         delete settings.template;
@@ -73,6 +82,7 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
         ngClick: '&',
         confirm: '@',
         confirmSettings: "=",
+        confirmTemplateName: "=",
         confirmTitle: '@',
         confirmOk: '@',
         confirmCancel: '@'
@@ -109,6 +119,9 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
               }
               if (scope.confirmCancel) {
                 data.cancel = scope.confirmCancel;
+              }
+              if (scope.confirmTemplateName){
+                data.templateName = scope.confirmTemplateName;
               }
               $confirm(data, scope.confirmSettings || {}).then(onSuccess);
             } else {
