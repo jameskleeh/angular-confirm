@@ -96,6 +96,31 @@ describe('angular-confirm', function() {
             expect(settings.template).not.toBeDefined();
         });
 
+        it("should use default template", function(){
+            var settings = $confirm({}, {});
+            expect(settings.templateUrl).toEqual($confirmModalDefaults.templateUrl)
+        });
+
+        it("should use override template", function(){
+            var settings = $confirm({}, {templateUrl: 'something'});
+            expect(settings.templateUrl).not.toEqual($confirmModalDefaults.templateUrl)
+            expect(settings.templateUrl).toEqual('something');
+        });
+
+        it("should use custom template if found", function(){
+            $confirmModalDefaults.additionalTemplates.danger = {templateUrl: "something"}
+            var settings = $confirm({templateName: 'random'}, {});
+            expect(settings.templateUrl).toEqual($confirmModalDefaults.templateUrl);
+
+            settings = $confirm({templateName: 'danger'}, {});
+            expect(settings.templateUrl).not.toEqual($confirmModalDefaults.templateUrl);
+            expect(settings.templateUrl).toEqual('something');
+
+            settings = $confirm({templateName: 'danger'}, {templateUrl: 'thiswillbeignored'});
+            expect(settings.templateUrl).not.toEqual($confirmModalDefaults.templateUrl);
+            expect(settings.templateUrl).toEqual('something');
+        })
+
     });
 
     describe('confirm directive', function() {
@@ -246,6 +271,20 @@ describe('angular-confirm', function() {
                 element.triggerHandler('click');
                 $timeout.flush();
                 expect($confirm).toHaveBeenCalledWith({text: "Are you sure?"}, {name: "Joe"})
+            });
+        });
+
+        describe('with confirmTemplateName option', function() {
+            beforeEach(angular.mock.inject(function($compile) {
+                element = angular.element('<button type="button" ng-click="click()" confirm="Are you sure?" confirm-template-name="danger">Delete</button>');
+                $compile(element)($scope);
+                $scope.$digest();
+            }));
+
+            it("should use custom template", function() {
+                element.triggerHandler('click');
+                $timeout.flush();
+                expect($confirm).toHaveBeenCalledWith({text: "Are you sure?", templateName: "danger"}, {})
             });
         });
 
