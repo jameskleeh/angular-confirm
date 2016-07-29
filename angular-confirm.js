@@ -34,16 +34,14 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
     template: '<div class="modal-header"><h3 class="modal-title">{{data.title}}</h3></div>' +
     '<div class="modal-body">{{data.text}}</div>' +
     '<div class="modal-footer">' +
-    '<button class="btn btn-{{data.okClass}}" ng-click="ok()">{{data.ok}}</button>' +
-    '<button class="btn btn-{{data.cancelClass}}" ng-click="cancel()">{{data.cancel}}</button>' +
+    '<button class="btn btn-primary" ng-click="ok()">{{data.ok}}</button>' +
+    '<button class="btn btn-default" ng-click="cancel()">{{data.cancel}}</button>' +
     '</div>',
     controller: 'ConfirmModalController',
     defaultLabels: {
       title: 'Confirm',
       ok: 'OK',
-      cancel: 'Cancel',
-      okClass: 'primary',
-      cancelClass: 'default'
+      cancel: 'Cancel'
     }
   })
   .factory('$confirm', ["$uibModal", "$confirmModalDefaults", function ($uibModal, $confirmModalDefaults) {
@@ -77,9 +75,7 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
         confirmSettings: "=",
         confirmTitle: '@',
         confirmOk: '@',
-        confirmCancel: '@',
-        confirmOkClass: '@',
-        confirmCancelClass: '@'
+        confirmCancel: '@'
       },
       link: function (scope, element, attrs) {
 
@@ -113,12 +109,6 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
               }
               if (scope.confirmCancel) {
                 data.cancel = scope.confirmCancel;
-              }
-              if (scope.confirmOkClass) {
-                data.okClass = scope.confirmOkClass;
-              }
-              if (scope.confirmCancelClass) {
-                data.cancelClass = scope.confirmCancelClass;
               }
               $confirm(data, scope.confirmSettings || {}).then(onSuccess);
             } else {
