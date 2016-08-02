@@ -49,7 +49,7 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
     return function (data, settings) {
       var defaults = angular.copy($confirmModalDefaults);
       settings = angular.extend(defaults, (settings || {}));
-      
+
       data = angular.extend({}, settings.defaultLabels, data || {});
 
       if(data.templateName){
@@ -80,12 +80,14 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
       scope: {
         confirmIf: "=",
         ngClick: '&',
+        confirmOnOpen: '&',
+        confirmOnDismiss: '&',
         confirm: '@',
         confirmSettings: "=",
         confirmTemplateName: "@",
         confirmTitle: '@',
         confirmOk: '@',
-        confirmCancel: '@'
+        confirmCancel: '@',
       },
       link: function (scope, element, attrs) {
 
@@ -103,6 +105,12 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
           scope.ngClick();
         }
 
+        function onDismiss() {
+          if (scope.confirmOnDismiss) {
+            scope.confirmOnDismiss()
+          }
+        }
+
         element.unbind("click").bind("click", function ($event) {
 
           $event.preventDefault();
@@ -111,6 +119,9 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
 
             if (angular.isUndefined(scope.confirmIf) || scope.confirmIf) {
               var data = {text: scope.confirm};
+              if (scope.confirmOnOpen) {
+                scope.confirmOnOpen()
+              }
               if (scope.confirmTitle) {
                 data.title = scope.confirmTitle;
               }
@@ -123,7 +134,7 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
               if (scope.confirmTemplateName){
                 data.templateName = scope.confirmTemplateName;
               }
-              $confirm(data, scope.confirmSettings || {}).then(onSuccess);
+              $confirm(data, scope.confirmSettings || {}).then(onSuccess, onDismiss);
             } else {
               scope.$apply(onSuccess);
             }
