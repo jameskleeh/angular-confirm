@@ -2,7 +2,7 @@
   "name": "angular-confirm",
   "version": "1.2.5",
   "description": "Angular Confirm Modal",
-  "main": "angular-confirm.min.js",
+  "main": "angular-confirm.js",
   "scripts": {
     "test": "gulp test-unit"
   },
