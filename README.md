@@ -4,7 +4,7 @@ angular-confirm
 
 Confirm modal dialog for AngularJS
 
-See [demo](http://schlogen.github.io/angular-confirm)
+See [demo](http://jameskleeh.github.io/angular-confirm)
 
 ## Install
 This module requires the Angular-UI-Bootstrap [$modal service](http://angular-ui.github.io/bootstrap/#/modal). The default template uses styles from [Bootstrap](https://getbootstrap.com/) 3.x.
