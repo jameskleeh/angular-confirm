@@ -1,6 +1,6 @@
 angular-confirm
 ===============
-[![Build Status](https://travis-ci.org/Schlogen/angular-confirm.svg?branch=master)](https://travis-ci.org/Schlogen/angular-confirm)
+[![Build Status](https://travis-ci.org/jameskleeh/angular-confirm.svg?branch=master)](https://travis-ci.org/jameskleeh/angular-confirm)
 
 Confirm modal dialog for AngularJS
 
