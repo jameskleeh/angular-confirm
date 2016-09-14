@@ -104,7 +104,7 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
         }
 
         element.unbind("click").bind("click", function ($event) {
-
+          $event.stopPropagation();
           $event.preventDefault();
 
           $timeout(function() {
