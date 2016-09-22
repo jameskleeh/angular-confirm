@@ -1,11 +1,8 @@
 {
   "name": "angular-confirm",
-  "version": "1.2.6",
+  "version": "2.0.0-alpha.1",
   "description": "Angular Confirm Modal",
-  "main": "angular-confirm.js",
-  "scripts": {
-    "test": "gulp test-unit"
-  },
+  "main": "dist/main.bundle.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/Schlogen/angular-confirm.git"
@@ -22,20 +19,39 @@
     "url": "https://github.com/Schlogen/angular-confirm/issues"
   },
   "homepage": "https://github.com/Schlogen/angular-confirm",
+  "angular-cli": {},
+  "scripts": {
+    "lint": "tslint \"src/**/*.ts\"",
+    "test": "ng test"
+  },
+  "dependencies": {
+    "@angular/common": "2.0.0",
+    "@angular/compiler": "2.0.0",
+    "@angular/core": "2.0.0",
+    "@angular/forms": "2.0.0",
+    "@angular/http": "2.0.0",
+    "@angular/platform-browser": "2.0.0",
+    "@angular/platform-browser-dynamic": "2.0.0",
+    "@angular/router": "3.0.0",
+    "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.4",
+    "core-js": "^2.4.1",
+    "rxjs": "5.0.0-beta.12",
+    "ts-helpers": "^1.1.1",
+    "zone.js": "^0.6.23"
+  },
   "devDependencies": {
-    "angular": "1.4.7",
-    "angular-ui-bootstrap": "0.14.3",
-    "angular-mocks": "1.4.7",
-    "gulp": "3.9.0",
-    "gulp-bump": "^1.0.0",
-    "gulp-git": "^1.6.0",
-    "gulp-header": "^1.7.1",
-    "gulp-ng-annotate": "^1.1.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^1.4.2",
-    "jasmine-core": "^2.3.4",
-    "karma": "0.13.19",
-    "karma-chrome-launcher": "^0.2.2",
-    "karma-jasmine": "^0.3.6"
+    "@types/jasmine": "^2.2.30",
+    "angular-cli": "^1.0.0-beta.15",
+    "codelyzer": "~0.0.26",
+    "jasmine-core": "2.4.1",
+    "jasmine-spec-reporter": "2.5.0",
+    "karma": "1.2.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-cli": "^1.0.1",
+    "karma-jasmine": "^1.0.2",
+    "karma-remap-istanbul": "^0.2.1",
+    "ts-node": "1.2.1",
+    "tslint": "3.13.0",
+    "typescript": "2.0.2"
   }
 }

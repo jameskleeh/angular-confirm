@@ -1,0 +1,37 @@
+{
+  "project": {
+    "version": "1.0.0-beta.14",
+    "name": "angular-confirm"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "main": "main.ts",
+      "test": "test.ts",
+      "assets": "assets",
+      "index": "index.html",
+      "tsconfig": "tsconfig.json",
+      "prefix": "confirm",
+      "mobile": false,
+      "styles": [],
+      "scripts": [],
+      "environments": {
+        "source": "environments/environment.ts",
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "addons": [],
+  "packages": [],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "css",
+    "prefixInterfaces": false
+  }
+}

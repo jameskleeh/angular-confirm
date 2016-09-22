@@ -5,11 +5,13 @@
   "ignore": [
     "test",
     "package.json",
-    "gulpfile.js",
     "LICENSE",
     ".gitignore",
+    ".npmignore",
     "*.md",
-    ".travis.yml"
+    ".travis.yml",
+    "karma.conf.js",
+    "angular-cli.json"
   ],
   "homepage": "https://github.com/Schlogen/angular-confirm",
   "authors": [
