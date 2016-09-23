@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ConfirmService} from "./confirm.service";
-import {ConfirmDirective} from "./confirm.directive";
+import {ConfirmComponent} from "./confirm.component";
 
 /*
  * angular-confirm
@@ -10,7 +10,7 @@ import {ConfirmDirective} from "./confirm.directive";
  * @license Apache
  */
 @NgModule({
-    declarations: [ConfirmDirective],
+    declarations: [ConfirmComponent],
     providers: [ConfirmService],
     imports: [NgbModule]
 })

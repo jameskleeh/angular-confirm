@@ -1,5 +1,5 @@
-import {Injectable, TemplateRef} from "@angular/core";
-import {NgbModal, NgbModalOptions} from "@ng-bootstrap/ng-bootstrap";
+import {Injectable, TemplateRef} from '@angular/core';
+import {NgbModal, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable()
 export class ConfirmService {

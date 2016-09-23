@@ -1,1 +1,1 @@
-import { ConfirmDirective } from './confirm/confirm.directive';
+import { ConfirmComponent } from './confirm/confirm.component';

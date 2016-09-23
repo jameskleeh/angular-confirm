@@ -1,15 +1,15 @@
 import { TestBed, async } from '@angular/core/testing';
-import { ConfirmDirective } from './confirm.directive';
+import { ConfirmComponent } from './confirm.component';
 import {NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 import {ConfirmService} from './confirm.service';
 import {TemplateRef} from '@angular/core';
 
-describe('Component: ConfirmDirective', () => {
+describe('Component: ConfirmComponent', () => {
 
-  let component: ConfirmDirective;
+  let component: ConfirmComponent;
 
   const confirmService = {
-    confirm: (template: string | TemplateRef, options ?: NgbModalOptions): Promise<any> => {
+    confirm: (template: string | TemplateRef<any>, options ?: NgbModalOptions): Promise<any> => {
       return new Promise((resolve, reject) => {
 
       });
@@ -19,14 +19,14 @@ describe('Component: ConfirmDirective', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        ConfirmDirective
+        ConfirmComponent
       ],
       providers: [
         {provide: ConfirmService, useValue: confirmService},
       ],
     });
 
-    let fixture = TestBed.createComponent(ConfirmDirective);
+    let fixture = TestBed.createComponent(ConfirmComponent);
     component = fixture.debugElement.componentInstance;
   });
 
