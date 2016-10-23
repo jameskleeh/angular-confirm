@@ -2,7 +2,7 @@ angular-confirm
 ===============
 [![Build Status](https://travis-ci.org/jameskleeh/angular-confirm.svg?branch=master)](https://travis-ci.org/jameskleeh/angular-confirm)
 
-Confirm modal dialog for Angular 2!  (NOT YET IMPLEMENTED)
+Confirm modal dialog for Angular 2!
 
 The AngularJS version is maintained in the [1.2.x branch](https://github.com/jameskleeh/angular-confirm/tree/1.2.x)
 
