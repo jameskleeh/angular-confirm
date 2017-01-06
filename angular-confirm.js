@@ -60,7 +60,7 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
         }
       }
 
-      if ('templateUrl' in settings && 'template' in settings) {
+      if (settings.templateUrl && 'template' in settings) {
         delete settings.template;
       }
 
