@@ -85,7 +85,8 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
         confirmTemplateName: "@",
         confirmTitle: '@',
         confirmOk: '@',
-        confirmCancel: '@'
+        confirmCancel: '@',
+        confirmStopPropagation: "="
       },
       link: function (scope, element, attrs) {
 
@@ -106,6 +107,10 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
         element.unbind("click").bind("click", function ($event) {
 
           $event.preventDefault();
+          
+          if (scope.confirmStopPropagation) {
+              $event.stopPropagation();
+          }
 
           $timeout(function() {
 
