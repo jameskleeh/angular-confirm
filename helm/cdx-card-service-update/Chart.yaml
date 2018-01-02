@@ -1,0 +1,7 @@
+apiVersion: v1
+description: A Helm chart for cdx card service update in Kubernetes
+name: cdx-card-service-update
+version: 0.1.0
+
+
+cdx-card-service-update

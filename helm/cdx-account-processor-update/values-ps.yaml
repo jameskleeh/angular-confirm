@@ -1,0 +1,109 @@
+configmap:
+  cdx:
+    name: cdx-account-processor-update
+    cassandra:
+      hosts: 10.18.131.7,10.18.131.8,10.18.131.9
+      keyspace: cust_usa_ps
+      username: cdxapi_db_ps
+      password_kvkey: cdxapi-ps-us-db-password-key
+      ssl_enabled: true
+      truststore:
+        path: /tmp/cassandra.truststore
+        password_kvkey: cdxapi-ps-us-db-truststore-password-key
+    eventhub:
+      namespace: s00199-enscdx-ps-us-account-na1
+      syndication_path: evhcdx-account-syndication
+      shared_access:
+        keyname: enscdx-account-SASsendlisten
+        password_kvkey: cdxevh-ps-us-access-key-account-na1
+      consumer_group_update: evhcdx-account-update-csg1
+      ingestion_path_update: evhcdx-account-update
+      storage:
+        container_name: stccdx-evh-account
+        name: s00199stapsusna1evhaccount
+        kvkey: cdxevh-ps-us-sta-key-account-na1
+    azure:
+      tenant_id: ee69be27-d938-4eb5-8711-c5e69ca43718
+      keyvault:
+        host: s00199nkvt10001.vault.azure.net
+        url: https://s00199nkvt10001.vault.azure.net
+      encryptaes_secret_kvkey: cdxapi-ps-us-encryptaes-secret
+      encryptiv_salt_kvkey: cdxapi-ps-us-encryptiv-salt
+      payload:
+        encryptaes_secret_kvkey: cdxapi-ps-us-encrypt-payload-aes-secret
+        encryptiv_salt_kvkey: cdxapi-ps-us-encrypt-payload-iv-salt
+    java_options: 
+    eh_consumer:
+      max_throttle_limit: 100
+      time_out_in_minutes: 2
+    akka_stream:
+      parallelism: 1
+      batch_size: 10
+      batch_time_window_in_seconds: 1
+    app_log_level: trace
+    app_stdout_color: false
+
+deployment:
+  spec:
+    replicas: 1
+    minreadyseconds: 35
+    strategy:
+      type: RollingUpdate
+      maxunavailable: 1
+      maxsurge: 2     
+  app: cdx-account-processor-update
+  container:
+    image: image
+    resources:
+      memory:
+        limits: 1Gi
+        requests: 1Gi
+      cpu:
+        limits: "1"
+        requests: "0.1"
+    port: 7030
+    livenessprobe:
+      httpget:
+        path: /health
+        port: 7030
+      initialdelayseconds: 60
+      periodseconds: 30
+      timeoutseconds: 10
+    readinessprobe:
+      httpget:
+        path: /health
+        port: 7030
+      initialdelayseconds: 60
+      periodseconds: 30
+      timeoutseconds: 10
+  envform:
+    name: 
+  envs:
+    env1:
+      name: 
+      fieldref:
+        apiversion: v1
+        fieldpath: metadata.name
+    env2:
+      name: 
+      secretkeyref:
+        name: 
+        key: 
+    env3:
+      name: 
+      secretkeyref:
+        name: 
+        key: 
+    env4:
+      name: 
+      secretkeyref:
+        name: 
+        key: 
+  imagepullsecrets:
+    name: 
+
+autoscale:
+  spec:
+    minreplicas: 1
+    maxreplicas: 1
+    targetcpuutil: 50

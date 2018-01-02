@@ -1,0 +1,7 @@
+apiVersion: v1
+description: A Helm chart for cdx eGift processor registration in Kubernetes
+name: cdx-eGift-processor-registration
+version: 0.1.0
+
+
+cdx-eGift-processor-registration

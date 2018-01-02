@@ -1,0 +1,7 @@
+apiVersion: v1
+description: A Helm chart for cdx eGift service registration in Kubernetes
+name: cdx-eGift-service-registration
+version: 0.1.0
+
+
+cdx-eGift-service-registration
