@@ -1,0 +1,7 @@
+apiVersion: v1
+description: A Helm chart for cdx card service create in Kubernetes
+name: cdx-card-service-create
+version: 0.1.0
+
+
+cdx-card-service-create
